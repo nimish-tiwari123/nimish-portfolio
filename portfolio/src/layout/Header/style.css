@@ -1,0 +1,18 @@
+.logo-header{
+    width: 200px;
+}
+.header-nav{
+    text-decoration: none;
+    color: var(--dark);
+    height: 30px;
+}
+.active-nav{
+    font-weight: bolder;
+    color: var(--primary);
+}
+
+@media screen and (max-width:768px) {
+    .logo-header{
+        width: 100px;
+    }
+}
