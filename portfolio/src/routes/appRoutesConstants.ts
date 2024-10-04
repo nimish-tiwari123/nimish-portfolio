@@ -1,7 +1,10 @@
 
 export const appRoutesConstants = {
+  
   home:  "/" ,
-  about:  "/about" ,
- 
+  profile:  "/profile",
+  services: "/services",
+  portfolio: "/portfolio",
+  connect: "/connect",
 
 };

@@ -1,8 +1,14 @@
-import { Header } from "../../layout";
+import AboutMe from "./AboutMe";
+import HeroSection from "./HeroSection";
+
 const Home: React.FC = () => {
-  return <div>
-    <Header/>
-  </div>;
+  return (
+    <div>
+      <HeroSection />
+      <AboutMe/>
+    </div>
+  );
 };
 
 export default Home;
+ 

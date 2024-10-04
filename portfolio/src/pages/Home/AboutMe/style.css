@@ -1,0 +1,8 @@
+@media screen and (max-width:768px) {
+     .aboutme-order{
+        order: 1;
+     }
+     .aboutme-order1{
+        order: 2;
+     }
+}

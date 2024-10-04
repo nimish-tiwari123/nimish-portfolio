@@ -16,11 +16,8 @@ const Header: React.FC = () => {
   return (
     <>
       <header>
-        <Container fluid className="p-0 bg-gray">
-          <Navbar
-            expand="lg"
-            className="px-2 mx-lg-5 mx-xl-5 mx-0 px-md-4 contain nav"
-          >
+        <Container fluid className="p-0 py-2 bg-gray">
+          <Navbar expand="lg" className="mx-lg-5 mx-xl-5 mx-0 px-2 contain nav">
             <Container fluid className="mx-xl-5 mx-lg-5 mx-0">
               <Navbar.Brand>
                 <Link to="/">
@@ -36,12 +33,22 @@ const Header: React.FC = () => {
               </button>
 
               {/* Offcanvas for small screens */}
-              <Offcanvas show={show} onHide={handleClose} placement="end" className="rounded-start-4">
+              <Offcanvas
+                show={show}
+                onHide={handleClose}
+                placement="end"
+                className="rounded-start-4"
+              >
                 <Offcanvas.Header closeButton>
-                  <Offcanvas.Title>Menu</Offcanvas.Title>
+                  <Offcanvas.Title>
+                    {" "}
+                    <Link to="/">
+                      <img src={logo} alt="Logo" className="logo-header" />
+                    </Link>
+                  </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                  <Nav className="flex-column gap-3 text-center">
+                  <Nav className="flex-column gap-4 text-center mt-5">
                     <NavLink
                       to="/"
                       className={({ isActive }) =>
@@ -84,11 +91,11 @@ const Header: React.FC = () => {
                     </NavLink>
 
                     <Link to="/login">
-                  <SecondaryButton text="Login" />
-                </Link>
-                <Link to="/hire">
-                  <PrimaryButton text="Hire Me" />
-                </Link>
+                      <SecondaryButton text="Login" />
+                    </Link>
+                    <Link to="/hire">
+                      <PrimaryButton text="Hire Me" />
+                    </Link>
                   </Nav>
                 </Offcanvas.Body>
               </Offcanvas>
