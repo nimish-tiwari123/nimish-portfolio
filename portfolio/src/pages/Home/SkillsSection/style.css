@@ -1,0 +1,30 @@
+
+  
+  .custom-bullets li {
+    position: relative; 
+    margin-bottom: 8px;
+  }
+  
+  .custom-bullets li::before {
+    content: ''; /* Custom bullet */
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: var(--secondary); 
+    border-radius: 50%; 
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%); 
+  }
+  .skill-card{
+    box-shadow: #56A77B0D 0px 8px 24px;
+    transition: 0.3s all;
+width: 80%;
+  }
+  .skill-card:hover{
+    box-shadow: #56a77a1a 0px 50px 100px -20px, #56a77a20 0px 30px 60px -30px;
+  }
+  .skill-card-desc{
+    color: #1f2d20b8;
+  }

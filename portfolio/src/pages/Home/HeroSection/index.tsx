@@ -10,7 +10,7 @@ const HeroSection = () => {
         <Row>
           <Col md={6} className="py-md-5 py-4">
             <h4 className="primary-color fw-medium mt-md-5 mt-3">Hi, I'm</h4>
-            <h1 className="fw-bold display-1 primary-font">Nimish Tiwari</h1>
+            <h1 className="fw-bold display-2 primary-font">Nimish Tiwari</h1>
             <h5 className="fw-medium primary-color hero-subheading">
               Frontend Developer | Graphic Designer | UI/UX Specialist.
             </h5>
