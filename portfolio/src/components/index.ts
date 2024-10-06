@@ -1,4 +1,4 @@
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
-
-export {PrimaryButton, SecondaryButton};
+import CommonModal from "./CommonModal";
+export {PrimaryButton, SecondaryButton, CommonModal};

@@ -5,6 +5,7 @@
     overflow: hidden;
     z-index: 1;
     color: var(--primary);
+    background: transparent;
   }
   
   .secondary-btn::after {

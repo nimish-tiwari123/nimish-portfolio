@@ -1,0 +1,12 @@
+.newsletter-box{
+    background-image: url("../../assets/home/newsletter.png");
+}
+.newsletter-desc{
+    width: 50% !important;
+}
+.newsletter-input{
+    width: 50% !important;
+}
+.subscribe-input:focus{
+    outline: none;
+}

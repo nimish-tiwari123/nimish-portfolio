@@ -1,21 +1,39 @@
 import { Container, Navbar, Nav, Offcanvas, Button } from "react-bootstrap";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import { useState } from "react";
-import { logo } from "../../assets";
-import { PrimaryButton, SecondaryButton } from "../../components";
+import { useState, useEffect } from "react";
+import { logo } from "../../assets"; // Assuming you have the logo in your assets
+import { PrimaryButton, SecondaryButton } from "../../components"; // Assuming you have these components
 import "./style.css";
 
 const Header: React.FC = () => {
   const [show, setShow] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // Scroll detection logic
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <header>
+      <header className={scrolled ? "scrolled" : ""}>
         <Container fluid className="p-0 py-2 bg-gray">
           <Navbar expand="lg" className="mx-lg-5 mx-xl-5 mx-0 px-2 contain nav">
             <Container fluid className="mx-xl-5 mx-lg-5 mx-0">
@@ -41,7 +59,6 @@ const Header: React.FC = () => {
               >
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title>
-                    {" "}
                     <Link to="/">
                       <img src={logo} alt="Logo" className="logo-header" />
                     </Link>
@@ -51,7 +68,7 @@ const Header: React.FC = () => {
                   <Nav className="flex-column gap-4 text-center mt-5">
                     <NavLink
                       to="/"
-                      className={({ isActive }) =>
+                      className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
                     >
@@ -59,7 +76,7 @@ const Header: React.FC = () => {
                     </NavLink>
                     <NavLink
                       to="/profile"
-                      className={({ isActive }) =>
+                      className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
                     >
@@ -67,7 +84,7 @@ const Header: React.FC = () => {
                     </NavLink>
                     <NavLink
                       to="/services"
-                      className={({ isActive }) =>
+                      className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
                     >
@@ -75,7 +92,7 @@ const Header: React.FC = () => {
                     </NavLink>
                     <NavLink
                       to="/portfolio"
-                      className={({ isActive }) =>
+                      className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
                     >
@@ -83,7 +100,7 @@ const Header: React.FC = () => {
                     </NavLink>
                     <NavLink
                       to="/connect"
-                      className={({ isActive }) =>
+                      className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
                     >
@@ -104,7 +121,7 @@ const Header: React.FC = () => {
               <Nav className="m-auto gap-5 d-none d-lg-flex">
                 <NavLink
                   to="/"
-                  className={({ isActive }) =>
+                  className={({ isActive }: { isActive: boolean }) =>
                     isActive ? "header-nav active-nav" : "header-nav"
                   }
                 >
@@ -112,7 +129,7 @@ const Header: React.FC = () => {
                 </NavLink>
                 <NavLink
                   to="/profile"
-                  className={({ isActive }) =>
+                  className={({ isActive }: { isActive: boolean }) =>
                     isActive ? "header-nav active-nav" : "header-nav"
                   }
                 >
@@ -120,7 +137,7 @@ const Header: React.FC = () => {
                 </NavLink>
                 <NavLink
                   to="/services"
-                  className={({ isActive }) =>
+                  className={({ isActive }: { isActive: boolean }) =>
                     isActive ? "header-nav active-nav" : "header-nav"
                   }
                 >
@@ -128,7 +145,7 @@ const Header: React.FC = () => {
                 </NavLink>
                 <NavLink
                   to="/portfolio"
-                  className={({ isActive }) =>
+                  className={({ isActive }: { isActive: boolean }) =>
                     isActive ? "header-nav active-nav" : "header-nav"
                   }
                 >
@@ -136,7 +153,7 @@ const Header: React.FC = () => {
                 </NavLink>
                 <NavLink
                   to="/connect"
-                  className={({ isActive }) =>
+                  className={({ isActive }: { isActive: boolean }) =>
                     isActive ? "header-nav active-nav" : "header-nav"
                   }
                 >

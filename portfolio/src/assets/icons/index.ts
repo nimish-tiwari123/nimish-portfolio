@@ -6,5 +6,6 @@ import vscode from "./vscode.svg";
 import illustrator from "./illustrator.svg";
 import photoshop from "./photoshop.svg";
 import figma from "./figma.svg";
+import success from "./success.svg";
 
-export {design, frontend, graphicdesign, uiuxdesign, vscode, illustrator, photoshop, figma};
+export {design, frontend, graphicdesign, uiuxdesign, vscode, illustrator, photoshop, figma,success};

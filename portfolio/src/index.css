@@ -37,3 +37,6 @@
 .bg-custom-primary{
     background-color: var(--primary);
 }
+.bg-green-dark{
+    background-color: var(--dark);
+}
