@@ -1,5 +1,6 @@
 .newsletter-box{
     background-image: url("../../assets/home/newsletter.png");
+    border-radius: 30px;
 }
 .newsletter-desc{
     width: 50% !important;
@@ -10,3 +11,14 @@
 .subscribe-input:focus{
     outline: none;
 }
+@media screen and (max-width:500px){
+    .newsletter-desc{
+        width: 100% !important;
+    }
+    .newsletter-input{
+        width: 100% !important;
+    }
+    .newsletter-box{
+        border-radius: 0px;
+    }
+  }

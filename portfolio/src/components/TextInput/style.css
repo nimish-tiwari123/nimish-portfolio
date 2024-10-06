@@ -1,0 +1,43 @@
+.input-auth{
+    background-color: #f1f1f186;
+    color: #5F5E5E;
+    transition: 0.7s;
+    padding: 10px 40px;
+    font-size: 14px;
+}
+.input-auth1{
+    background-color: #f1f1f186;
+    color: #5F5E5E;
+    transition: 0.7s;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+.input-auth:focus, .input-auth1:focus{
+   outline: 1px solid var(--secondary);
+   border: none;
+
+}
+.err1{
+    font-size: 13px;
+    height: 10px;
+    transition: 0.7s;
+
+}
+.auth-icon{
+    top: 10px;
+    color: #9c9c9c;
+
+}
+
+.input-disabled{
+    background-color: #F1F1F1;
+}
+
+@media screen and (max-width:768px) {
+    .input-auth{
+       font-size: 12px;
+    }
+    .input-auth1{
+        font-size: 12px;
+    }
+}

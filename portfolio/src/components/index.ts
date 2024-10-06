@@ -1,4 +1,6 @@
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
 import CommonModal from "./CommonModal";
-export {PrimaryButton, SecondaryButton, CommonModal};
+import TextInput from "./TextInput";
+import TextArea from "./TextArea";
+export {PrimaryButton, SecondaryButton, CommonModal, TextArea, TextInput};

@@ -7,5 +7,8 @@ import illustrator from "./illustrator.svg";
 import photoshop from "./photoshop.svg";
 import figma from "./figma.svg";
 import success from "./success.svg";
-
-export {design, frontend, graphicdesign, uiuxdesign, vscode, illustrator, photoshop, figma,success};
+import call from "./call.svg";
+import email from "./email.svg";
+import location from "./location.svg";
+import arrowright from "./arrowright.svg"
+export {design, frontend, graphicdesign, uiuxdesign, vscode, illustrator, photoshop, figma,success, call, email, location, arrowright};

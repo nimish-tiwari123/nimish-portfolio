@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { appRoutesConstants } from "./appRoutesConstants.ts";
 import { Home, Profile, Services, Portfolio, Connect } from "../pages";
-import { Header } from "../layout/index.ts";
+import { Header, Footer } from "../layout/index.ts";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +15,7 @@ const AppRoutes = () => {
           <Route path={appRoutesConstants.portfolio} element={<Portfolio />} />
           <Route path={appRoutesConstants.connect} element={<Connect />} />
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </>
   );

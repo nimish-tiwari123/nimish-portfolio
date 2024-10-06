@@ -30,10 +30,10 @@ const Newsletter: React.FC = () => {
   };
 
   return (
-    <section className="py-5">
+    <section className="py-5" >
       <Container>
-        <Row className="newsletter-box rounded-5 p-5 d-flex flex-column">
-          <h1 className="text-light text-center primary-font fw-bold">
+        <Row className="newsletter-box  px-md-5 px-2 py-5 d-flex flex-column"  data-aos="zoom-in">
+          <h1 className="text-light text-center primary-font fw-bold display-4">
             Subscribe to My Newsletter
           </h1>
           <p className="text-light text-center mx-auto mt-4 newsletter-desc">
@@ -47,17 +47,17 @@ const Newsletter: React.FC = () => {
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
-              <Form className="d-flex justify-content-center">
+              <Form className="d-flex justify-content-center flex-column">
                 <div className="input-group bg-white rounded-3 p-1 newsletter-input mx-auto my-4 ">
                   <Field
                     name="email"
                     type="email"
                     placeholder="Enter your email address"
-                    className="p-3 border-0 w-75 subscribe-input"
+                    className="p-md-3 p-2 border-0 w-75 subscribe-input"
                   />
                   <button
                     type="submit"
-                    className="bg-green-dark text-light p-3 fw-medium rounded-3 border-0 w-25"
+                    className="bg-green-dark text-light p-md-3 p-2 fw-medium rounded-3 border-0 w-25"
                     disabled={isSubmitting}
                   >
                     Subscribe

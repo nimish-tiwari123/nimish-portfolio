@@ -15,7 +15,7 @@ const Card: React.FC<CardProps> = ({
   tools,
 }) => {
   return (
-    <div className="rounded-4 bg-white p-4 skill-card position-relative">
+    <div className="rounded-4 bg-white p-4 skill-card position-relative" data-aos="zoom-in-left" >
       <div className="tools-section mb-3 position-absolute end-0 top-0 m-3">
         {tools.map((item, index) => (
           <img key={index} src={item} alt="tool icon" className="me-2" />

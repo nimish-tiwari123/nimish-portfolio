@@ -34,7 +34,7 @@ const Header: React.FC = () => {
   return (
     <>
       <header className={scrolled ? "scrolled" : ""}>
-        <Container fluid className="p-0 py-2 bg-gray">
+        <Container fluid className="p-0 py-2 bg-gray" >
           <Navbar expand="lg" className="mx-lg-5 mx-xl-5 mx-0 px-2 contain nav">
             <Container fluid className="mx-xl-5 mx-lg-5 mx-0">
               <Navbar.Brand>

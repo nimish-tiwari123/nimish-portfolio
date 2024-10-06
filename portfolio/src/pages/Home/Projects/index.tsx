@@ -16,13 +16,13 @@ const Projects = () => {
         <h5 className="primary-color fw-medium mt-5 text-center">
           My Portfolio
         </h5>
-        <h1 className="fw-bold primary-font text-center">
+        <h1 className="fw-bold primary-font text-center display-4">
           My Complete Projects
         </h1>
-        <Row className="py-5 mt-5">
+        <Row className="py-5 mt-md-5 mt-3">
           {/* Health Post Project */}
           <Col md={4}>
-            <div className="project-wrapper rounded-4">
+            <div className="project-wrapper rounded-4 " data-aos="zoom-in">
               <img
                 src={healthpost}
                 alt="Post Design"
@@ -39,7 +39,7 @@ const Projects = () => {
 
           {/* AWNS Web Project */}
           <Col md={4}>
-            <div className="project-wrapper rounded-4">
+            <div className="project-wrapper rounded-4 mt-md-0 mt-4"  data-aos="zoom-in">
               <img
                 src={awnsweb}
                 alt="AWNS Website Development"
@@ -56,7 +56,7 @@ const Projects = () => {
 
           {/* Fitness App Project */}
           <Col md={4}>
-            <div className="project-wrapper rounded-4">
+            <div className="project-wrapper rounded-4 mt-md-0 mt-4"  data-aos="zoom-in">
               <img
                 src={fitnessapp}
                 alt="Fitness App"
@@ -72,8 +72,8 @@ const Projects = () => {
           </Col>
 
           {/* AWNS Management Project */}
-          <Col md={12}>
-            <div className="project-wrapper mt-4 rounded-4 bg-success">
+          <Col md={12} className="d-none d-md-block">
+            <div className="project-wrapper mt-4 rounded-4"  data-aos="zoom-in">
               <img
                 src={awnsmanagement}
                 alt="AWNS Management Design"

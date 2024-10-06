@@ -28,3 +28,9 @@ width: 80%;
   .skill-card-desc{
     color: #1f2d20b8;
   }
+
+  @media screen and (max-width:500px){
+    .skill-card{
+      width: 100%;
+    }
+  }

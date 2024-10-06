@@ -40,3 +40,6 @@
 .bg-green-dark{
     background-color: var(--dark);
 }
+.secondary-border {
+    border: 1px solid var(--secondary);
+}

@@ -1,9 +1,8 @@
 import AboutMe from "./AboutMe";
 import HeroSection from "./HeroSection";
-import Newsletter from "../../layout/Newsletter";
 import Projects from "./Projects";
 import SkillsSection from "./SkillsSection";
-
+import {Newsletter, ConnectUs} from "../../layout";
 const Home: React.FC = () => {
   return (
     <div>
@@ -12,6 +11,7 @@ const Home: React.FC = () => {
       <SkillsSection />
       <Projects />
       <Newsletter />
+      <ConnectUs/>
     </div>
   );
 };

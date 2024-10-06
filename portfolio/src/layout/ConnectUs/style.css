@@ -1,0 +1,8 @@
+.connect-details{
+    height: 75%;
+}
+@media screen and (max-width:500px){
+   .connect-details{
+    height: 100%;
+   }
+  }

@@ -19,20 +19,20 @@ const SkillsSection = () => {
       <Container>
         <Row>
           <Col md={5} className="position-relative">
-            <h5 className="primary-color fw-medium mt-5">Special Skills</h5>
-            <h1 className="fw-bold primary-font display-3">
+            <h5 className="primary-color fw-medium mt-5 text-center text-md-start" data-aos="fade-right">Special Skills</h5>
+            <h1 className="fw-bold primary-font display-3 text-center text-md-start">
               My Special Skill Field Here.
             </h1>
-            <div className="mt-4">
+            <div className="mt-4 d-md-block d-none" data-aos="fade-up">
               <SecondaryButton text="Hire Me" />
             </div>
             <img
               src={design}
               alt="design"
-              className="w-25 position-absolute start-0 bottom-0 p-2"
+              className="w-25 position-absolute start-0 bottom-0 p-2 d-md-block d-none"
             />
           </Col>
-          <Col md={7} className="d-flex gap-3 flex-column">
+          <Col md={7} className="d-flex gap-3 flex-column mt-5 mt-md-0">
             <Card
               headingIcon={frontend} // Image path as string
               headingText="Frontend Development"
