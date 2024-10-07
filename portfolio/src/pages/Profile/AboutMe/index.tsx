@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { PrimaryButton } from "../../../components";
+import { PrimaryButton, SecondaryButton } from "../../../components";
 import { aboutme } from "../../../assets/home";
 import { design } from "../../../assets/icons";
 import "./style.css";
@@ -22,18 +22,20 @@ const AboutMe = () => {
           >
             <h5 className="primary-color fw-medium mt-5" data-aos="fade-left">Who I Am</h5>
             <h1 className="fw-bold primary-font display-4">About Me</h1>
-
-            <p className="desc-hero" data-aos="fade-left">
-              I’m a creative developer and designer with a passion for turning
-              ideas into functional, beautiful digital experiences. With
-              expertise in frontend technologies like React, Angular, and Next
-              JS, along with graphic design skills using Adobe Illustrator and
-              Photoshop, I create seamless and visually appealing user
-              interfaces.
+            <p className="desc-hero text-dark-custom fw-bold m-0" data-aos="fade-left">
+            Hello, I’m Nimish Tiwari
             </p>
+            <p className="desc-hero" data-aos="fade-left">
+            I am a passionate frontend developer, graphic designer, and UI/UX enthusiast with a BCA degree from Sant Singaji Institute of Science & Management, Sandalpur. My expertise spans across modern web technologies, graphic design tools, and user-centered design, giving me a unique edge in delivering visually appealing and highly functional digital experiences.
+            </p>
+            <p className="desc-hero" data-aos="fade-left">
+            I am a versatile professional, currently working as a <span className="fw-bold">Frontend Developer, UI/UX Designer,</span> and <span className="fw-bold">Graphic Designer</span> at <span className="fw-bold">AWNS</span> since February 2024. My journey in tech and design began during my academic years, where I developed a strong blend of creative and technical skills. </p>
             <div className="d-none d-lg-flex align-items-center gap-3 mt-4" data-aos="fade-up">
+            <Link to="/connect">
+                <SecondaryButton text="Hire Me"/>
+              </Link>
               <Link
-                to="/Nimish_Tiwari.pdf" 
+                href="/Nimish_Tiwari.pdf" 
                 download="Nimish_Tiwari_CV.pdf" 
               >
                 <PrimaryButton text="Download CV" icon={true} />

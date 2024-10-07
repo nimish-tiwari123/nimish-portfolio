@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { footerlogo } from "../../assets";
 import { arrowright, call, email, location} from "../../assets/icons";
@@ -24,11 +25,12 @@ const Footer: React.FC = () => {
               designs.
             </p>
            <div className="text-center text-md-start">
-           <a href="/profile">
+            <Link to="/profile">
             <button className="py-3 px-5 mt-4 rounded-pill secondary-color bg-transparent fw-medium secondary-border">
               About Me
             </button>
-            </a>
+            </Link>
+         
            </div>
           </Col>
 
@@ -36,23 +38,23 @@ const Footer: React.FC = () => {
           <Col md={3} sm={6} className="mb-4 px-md-5 px-0">
             <h5 className="footer-title text-light fw-bold text-center text-md-start mt-4 mt-md-0">Quick Links</h5>
             <ul className="list-unstyled d-flex gap-3 flex-column mt-4">
-              <a href="/">
+              <Link to="/">
                 <li className="text-center text-md-start">
                   <img src={arrowright} alt="arrow" /> Home
                 </li>
-              </a>
-              <a href="/profile">
+              </Link>
+              <Link to="/profile">
               <li className="text-center text-md-start"> <img src={arrowright} alt="arrow" /> Profile</li>
-              </a>
-              <a href="/services">
+              </Link>
+              <Link to="/services">
               <li className="text-center text-md-start">  <img src={arrowright} alt="arrow" /> Services</li>
-              </a>
-              <a href="/portfolio">
+              </Link>
+              <Link to="/portfolio">
               <li className="text-center text-md-start"> <img src={arrowright} alt="arrow" /> Portfolio</li>
-              </a>
-              <a href="/connect">
+              </Link>
+              <Link to="/connect">
               <li className="text-center text-md-start"> <img src={arrowright} alt="arrow" /> Connect</li>
-              </a>
+              </Link>
             </ul>
           </Col>
           <Col md={3} sm={6} className="mb-4">
@@ -89,21 +91,21 @@ const Footer: React.FC = () => {
                 District - Dewas (M.P.)
               </li>
               <li className="d-flex gap-4 mt-3 social-icons contact-flex">
-                <a href="https://www.linkedin.com/in/nimish-tiwari-542146274" target="_blank">
+                <Link to="https://www.linkedin.com/in/nimish-tiwari-542146274" target="_blank">
                 <span>
                 <TiSocialLinkedin size={28} className="bg-light rounded-1"/>
                 </span>
-                </a>
-                <a href="https://github.com/nimish-tiwari123" target="_blank">
+                </Link>
+                <Link to="https://github.com/nimish-tiwari123" target="_blank">
                 <span>
                 <PiGithubLogoFill size={28} className="bg-light rounded-1"/>
                 </span>
-                </a>
-                <a href="https://www.behance.net/nimishtiwari2" target="_blank">
+                </Link>
+                <Link to="https://www.behance.net/nimishtiwari2" target="_blank">
                 <span>
                 <AiOutlineBehance size={28} className="bg-light rounded-1"/>
                 </span>
-                </a>
+                </Link>
               </li>
             </ul>
           </Col>

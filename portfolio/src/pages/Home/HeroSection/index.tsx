@@ -22,12 +22,12 @@ const HeroSection = () => {
               digital experiences that are both functional and beautiful.
             </p>
             <div className="d-none d-lg-flex align-items-center gap-3 mt-4" data-aos="fade-up">
-            <a
+            <Link
                 href="/Nimish_Tiwari.pdf" 
                 download="Nimish_Tiwari_CV.pdf" 
               >
                 <PrimaryButton text="Download CV" icon={true} />
-              </a>
+              </Link>
               <Link to="/portfolio">
                 <SecondaryButton text="View Portfolio" icon={true}/>
               </Link>
