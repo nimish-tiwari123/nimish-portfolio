@@ -11,7 +11,7 @@ const AboutMe = () => {
       <Container>
         <Row>
           <Col md={6} className="aboutme-order1" >
-          <div data-aos="zoom-in-right" className="py-md-5 pe-md-5 p-0">
+          <div className="py-md-5 pe-md-5 p-0">
           <img src={aboutme} alt="Hero Image" className="w-100 p-5"  />
 
           </div>

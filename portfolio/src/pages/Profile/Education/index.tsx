@@ -29,7 +29,7 @@ const Education = () => {
                 desc="Achieved 83% in PCM (Physics, Chemistry, Mathematics) stream."
               />
             </Col>
-            <Col md={6} className="d-flex align-items-center">
+            <Col md={6} className="d-flex align-items-center mt-5 mt-md-0">
             <img src={education} alt="Education"  className="w-100"/></Col>
           </Row>
         </Container>

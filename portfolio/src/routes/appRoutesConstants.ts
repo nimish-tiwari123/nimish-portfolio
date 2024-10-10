@@ -6,5 +6,5 @@ export const appRoutesConstants = {
   services: "/services",
   portfolio: "/portfolio",
   connect: "/connect",
-
+  login:"/login"
 };

@@ -4,7 +4,7 @@ import "./style.css";
 import Card from "./Card";
 const Experience = () => {
   return (
-    <section className="py-5">
+    <section className="py-md-5 py-3">
       <Container >
         <h5 className="primary-color fw-medium mt-5 text-center">
         Roles & Contributions in the Industry
@@ -13,7 +13,7 @@ const Experience = () => {
         Professional Experience
         </h1>
 
-        <Container className="my-5 ">
+        <Container className="my-2">
           <Row>
           <Col md={6} className="d-flex align-items-center">
           <img src={experience} alt="Education"  className="w-100"/></Col>

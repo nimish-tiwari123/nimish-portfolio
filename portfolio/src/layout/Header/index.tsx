@@ -110,7 +110,7 @@ const Header: React.FC = () => {
                     <Link to="/login">
                       <SecondaryButton text="Login" />
                     </Link>
-                    <Link to="/hire">
+                    <Link to="/connect">
                       <PrimaryButton text="Hire Me" />
                     </Link>
                   </Nav>
@@ -165,7 +165,7 @@ const Header: React.FC = () => {
                 <Link to="/login">
                   <SecondaryButton text="Login" />
                 </Link>
-                <Link to="/hire">
+                <Link to="/connect">
                   <PrimaryButton text="Hire Me" />
                 </Link>
               </div>

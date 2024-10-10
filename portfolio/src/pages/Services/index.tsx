@@ -1,7 +1,14 @@
+import HeroSection from "./HeroSection";
+import Skills from "./Skills";
+import ChooseMe from "./ChooseMe";
 
 const Services = () => {
   return (
-    <div>Services</div>
+   <>
+   <HeroSection/>
+   <Skills/>
+   <ChooseMe/>
+   </>
   )
 }
 

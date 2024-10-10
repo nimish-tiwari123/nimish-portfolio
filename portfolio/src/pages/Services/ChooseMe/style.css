@@ -1,0 +1,12 @@
+.choose-me-img{
+    height: 100%;
+    width: auto;
+}
+
+@media screen and (max-width:500px) {
+    
+    .choose-me-img{
+        height: auto;
+        width: 100%;
+    }
+}
