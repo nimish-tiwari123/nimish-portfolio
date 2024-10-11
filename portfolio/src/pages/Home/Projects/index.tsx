@@ -30,8 +30,8 @@ const Projects = () => {
               />
               <div className="project-overlay p-3 rounded-4">
                 <div className="project-text">
-                  <h3 className="text-light fw-bold fs-4">Health Post Design</h3>
-                  <p className="text-light fw-medium">Graphic Design</p>
+                  <h3 className="text-light fw-bold fs-4 m-0">Health Post Design</h3>
+                  <p className="text-light fw-medium m-0 mt-1">Graphic Design</p>
                 </div>
               </div>
             </div>
@@ -47,8 +47,8 @@ const Projects = () => {
               />
               <div className="project-overlay p-3 rounded-4">
                 <div className="project-text">
-                  <h3 className="text-light fw-bold fs-4">AWNS Website</h3>
-                  <p className="text-light fw-medium">Developed the frontend using Next JS</p>
+                  <h3 className="text-light fw-bold fs-4 m-0">AWNS Website</h3>
+                  <p className="text-light fw-medium m-0 pt-1">Developed the frontend using Next JS</p>
                 </div>
               </div>
             </div>
@@ -64,8 +64,8 @@ const Projects = () => {
               />
               <div className="project-overlay p-3 rounded-4">
                 <div className="project-text">
-                  <h3  className="text-light fw-bold fs-4">Fitness App</h3>
-                  <p  className="text-light fw-medium">UI/UX Design</p>
+                  <h3  className="text-light fw-bold fs-4 m-0">Fitness App</h3>
+                  <p  className="text-light fw-medium m-0 pt-1">UI/UX Design</p>
                 </div>
               </div>
             </div>
@@ -81,8 +81,8 @@ const Projects = () => {
               />
               <div className="project-overlay p-3 rounded-4">
                 <div className="project-text">
-                  <h3 className="text-light fw-bold fs-4">AWNS Management</h3>
-                  <p className="text-light fw-medium">UI/UX Design</p>
+                  <h3 className="text-light fw-bold fs-4 m-0">AWNS Management</h3>
+                  <p className="text-light fw-medium m-0 pt-1">UI/UX Design</p>
                 </div>
               </div>
             </div>

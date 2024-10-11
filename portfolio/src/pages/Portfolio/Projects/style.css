@@ -1,0 +1,17 @@
+.tab-button{
+    padding: 10px 30px;
+    border-radius: 50px;
+    border: 1px solid #dddddc;
+    background-color: #F5F5F4;
+    font-weight: 500;
+    width: 150px;
+    transition: 0.5s all;
+}
+.active-tab{
+    color: white;
+    background-color: var(--primary);
+    font-weight: 600;
+}
+.project-view-btn{
+    border: 1.5px solid white;
+}

@@ -1,7 +1,15 @@
+import { ConnectUs, Newsletter } from "../../layout"
+import HeroSection from "./HeroSection"
+import Projects from "./Projects"
 
 const Portfolio = () => {
   return (
-    <div>Portfolio</div>
+   <>
+   <HeroSection/>
+   <Projects/>
+   <Newsletter/>
+   <ConnectUs/>
+   </>
   )
 }
 
