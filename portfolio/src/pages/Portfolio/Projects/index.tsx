@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { healthpost } from "../../../assets/home/projects";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import ProjectView from "./Modals/ProjectView"; 
-import "./style.css";
 import { PrimaryButton } from "../../../components";
+import { nodata } from "../../../assets";
+import "./style.css";
+
 
 const Projects = () => {
   const [activeTab, setActiveTab] = useState("All");
@@ -114,13 +116,19 @@ const Projects = () => {
               </Row>
             )}
             {activeTab === "Frontend" && (
-              <div>Frontend Projects will be shown here.</div>
+              <div>
+                <img src={nodata} alt="No Project" className="no-project-img d-block m-auto"/>
+              </div>
             )}
             {activeTab === "UI/UX" && (
-              <div>UI/UX Projects will be shown here.</div>
+              <div>
+                 <img src={nodata} alt="No Project" className="no-project-img d-block m-auto"/>
+              </div>
             )}
             {activeTab === "Graphic" && (
-              <div>Graphic Projects will be shown here.</div>
+              <div>
+                 <img src={nodata} alt="No Project" className="no-project-img d-block m-auto"/>
+              </div>
             )}
           </Container>
           <div  className="d-flex justify-content-center">

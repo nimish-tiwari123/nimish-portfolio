@@ -1,0 +1,15 @@
+.dropzone {
+    border: 2px dashed rgba(131, 131, 131, 0.29); 
+    width: 40%;
+    height: 280px;
+
+}
+
+.dropzone-img{
+    height: 270px;
+}
+@media screen and (max-width:600px) {
+    .dropzone{
+        width: 100%;
+    }
+}

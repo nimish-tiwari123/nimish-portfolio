@@ -37,7 +37,9 @@ const ConnectUs: React.FC = () => {
         <h5 className="primary-color fw-medium mt-5 text-center">
           Let's Work Together
         </h5>
-        <h1 className="fw-bold primary-font text-center display-4">Get in Touch</h1>
+        <h1 className="fw-bold primary-font text-center display-4">
+          Get in Touch
+        </h1>
         <h3 className="primary-color primary-font fw-bold mt-5 mb-4 ">
           Just Say Hello
         </h3>
@@ -47,10 +49,8 @@ const ConnectUs: React.FC = () => {
               <Row className="mb-4">
                 <Col md={6}>
                   <div className="mb-3">
-                    <label htmlFor="name" className="form-label fw-medium">
-                      Name
-                    </label>
                     <TextInput
+                      label="Name"
                       name="name"
                       placeholder="Enter your name"
                       formik={formik}
@@ -60,10 +60,8 @@ const ConnectUs: React.FC = () => {
 
                 <Col md={6}>
                   <div className="mb-3">
-                    <label htmlFor="email" className="form-label fw-medium">
-                      Your Email
-                    </label>
                     <TextInput
+                      label="Your Email"
                       name="email"
                       type="email"
                       placeholder="Enter your email"
@@ -73,13 +71,9 @@ const ConnectUs: React.FC = () => {
                 </Col>
                 <Col md={6}>
                   <div className="mb-3">
-                    <label htmlFor="subject" className="form-label fw-medium">
-                      Subject{" "}
-                      <span className="text-secondary fw-light">
-                        (optional)
-                      </span>
-                    </label>
                     <TextInput
+                      label="Subject"
+                      optional={true}
                       name="subject"
                       placeholder="Enter the subject"
                       formik={formik}
@@ -89,13 +83,9 @@ const ConnectUs: React.FC = () => {
 
                 <Col md={6}>
                   <div className="mb-3">
-                    <label htmlFor="phone" className="form-label fw-medium">
-                      Phone Number{" "}
-                      <span className="text-secondary fw-light">
-                        (optional)
-                      </span>
-                    </label>
                     <TextInput
+                      label="Phone Number"
+                      optional={true}
                       name="phone"
                       type="tel"
                       placeholder="Enter your phone number"
@@ -105,10 +95,8 @@ const ConnectUs: React.FC = () => {
                 </Col>
                 <Col>
                   <div className="mb-3">
-                    <label htmlFor="message" className="form-label fw-medium">
-                      Your Message
-                    </label>
                     <TextArea
+                      label="Your Message"
                       name="message"
                       placeholder="Enter your message"
                       formik={formik}
@@ -117,10 +105,6 @@ const ConnectUs: React.FC = () => {
                   </div>
                 </Col>
               </Row>
-
-            
-
-             
 
               {/* Submit Button */}
               <PrimaryButton text="Send Message" />

@@ -1,3 +1,9 @@
 .profile-hero{
     height: 50vh;
 }
+
+@media screen and (max-width:600px) {
+    .profile-hero{
+        height: 30vh !important;
+    }
+}

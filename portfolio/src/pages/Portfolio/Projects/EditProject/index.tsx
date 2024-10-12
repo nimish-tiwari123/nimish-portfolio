@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import {
   TextInput,
@@ -15,9 +15,26 @@ import HeroSection from "./HeroSection";
 import { success } from "../../../../assets/icons";
 import "./style.css";
 
-const AddProject = () => {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+interface ProjectData {
+  title: string;
+  category: string;
+  tools?: string;
+  technologies?: string;
+  projectUrl?: string;
+  projectStatus: string;
+  description: string;
+  image?: File | string | null; // Allow string for default image URL
+}
+
+interface EditProjectProps {
+  projectData: ProjectData;
+  onUpdate: (updatedData: ProjectData) => void;
+}
+
+const EditProject: React.FC<EditProjectProps> = ({ projectData, onUpdate }) => {
+  const [selectedImage, setSelectedImage] = useState<File | string | null>(projectData.image || null);
   const [showModal, setShowModal] = useState(false);
+
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Project Title is required"),
     category: Yup.string().required("Project Category is required"),
@@ -28,19 +45,20 @@ const AddProject = () => {
 
   const formik = useFormik({
     initialValues: {
-      title: "",
-      category: "",
-      tools: "",
-      technologies: "",
-      projectUrl: "",
-      projectStatus: "",
-      description: "",
-      image: null, // Add image to initial values
+      title: projectData.title || "",
+      category: projectData.category || "",
+      tools: projectData.tools || "",
+      technologies: projectData.technologies || "",
+      projectUrl: projectData.projectUrl || "",
+      projectStatus: projectData.projectStatus || "",
+      description: projectData.description || "",
+      image: projectData.image || null,
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log("Form values:", values);
-      setShowModal(true); 
+      console.log("Updated Form values:", values);
+      onUpdate(values); // Call the onUpdate function passed as prop
+      setShowModal(true);
       formik.resetForm();
       setSelectedImage(null);
     },
@@ -60,19 +78,26 @@ const AddProject = () => {
 
   const handleDrop = (acceptedFiles: File[]) => {
     setSelectedImage(acceptedFiles[0]);
-    formik.setFieldValue("image", acceptedFiles[0]); // Set the image in Formik state
+    formik.setFieldValue("image", acceptedFiles[0]);
   };
 
   const handleReset = () => {
-    formik.resetForm(); // Reset form data
-    setSelectedImage(null); // Clear selected image
+    formik.resetForm(); 
+    setSelectedImage(null); 
   };
+
+  useEffect(() => {
+    if (selectedImage && typeof selectedImage === "object") {
+      const objectUrl = URL.createObjectURL(selectedImage);
+      return () => URL.revokeObjectURL(objectUrl);
+    }
+  }, [selectedImage]);
 
   return (
     <>
       <HeroSection />
       <Container className="p-md-5 p-3 pt-5">
-        <h1 className="primary-font fw-bold text-center">Add New Project</h1>
+        <h1 className="primary-font fw-bold text-center">Edit Project</h1>
         <form onSubmit={formik.handleSubmit} className="p-md-5 p-0 m-md-5 m-0">
           <Row>
             <Col md={6}>
@@ -143,38 +168,38 @@ const AddProject = () => {
                 <label className="form-label fw-medium mt-3">Product Image</label>
                 <Dropzone
                   onDrop={handleDrop}
-                  accept={{ 'image/*': [] }} // Correctly specify accepted file types
+                  accept={{ 'image/*': [] }} 
                   multiple={false}
                 >
                   {({ getRootProps, getInputProps }) => (
                     <div
                       {...getRootProps()}
-                      className="dropzone d-flex align-items-center justify-content-center rounded-4 py-5"
+                      className="dropzone d-flex align-items-center justify-content-center text-center rounded-4 py-5"
                     >
                       <input {...getInputProps()} />
-                      {!selectedImage ? (
-                        <div className="text-center">
-                          <BsCloudUpload size={30} className="opacity-75" />
-                          <p className="mt-3 m-0">Drag and Drop here</p>
-                          <p className="opacity-50">or</p>
-                          <button type="button" className="text-light rounded-pill py-2 px-4 bg-custom-primary border-0">
-                           Browse
-                          </button>
+                      {selectedImage ? (
+                        <div>
+                          <img
+                            src={
+                              typeof selectedImage === "string"
+                                ? selectedImage
+                                : URL.createObjectURL(selectedImage)
+                            }
+                            alt="Selected"
+                            onClick={() => setSelectedImage(null)}
+                            className="w-100 rounded-4 border cursor-pointer dropzone-img"
+                          />
                         </div>
                       ) : (
                         <div>
-                          <img
-                            src={URL.createObjectURL(selectedImage)}
-                            alt="Selected"
-                            onClick={() => setSelectedImage(null)} 
-                            className="w-100 rounded-4 border cursor-pointer dropzone-img"
-                          />
+                          <BsCloudUpload size={50} />
+                          <p>Drag 'n' drop or click to select an image</p>
                         </div>
                       )}
                     </div>
                   )}
                 </Dropzone>
-                {formik.touched.image && formik.errors.image && (
+                {typeof formik.errors.image === "string" && (
                   <div className="text-danger err1">{formik.errors.image}</div>
                 )}
               </div>
@@ -188,19 +213,19 @@ const AddProject = () => {
             >
               Reset
             </button>
-            <PrimaryButton text="Add Project" />
+            <PrimaryButton text="Update Project" />
           </div>
         </form>
       </Container>
       <CommonModal
         show={showModal}
         onHide={() => setShowModal(false)}
-        title="Project Added Successfully!"
-        body="Your project has been successfully added to your portfolio. You can now view it in the portfolio section or add another project!"
+        title="Project Updated Successfully!"
+        body="Your project has been successfully updated in your portfolio."
         success={success}
       />
     </>
   );
 };
 
-export default AddProject;
+export default EditProject;

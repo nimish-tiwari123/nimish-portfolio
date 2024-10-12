@@ -1,25 +1,18 @@
 import React from "react";
 import { FormikProps } from "formik";
-import "./style.css";
 
-interface TextAreaProps {
-  label:string,
+interface SelectFieldProps {
+    label:string;
+    optional?: boolean;
   name: string;
   placeholder: string;
   formik: FormikProps<any>;
-  rows?: number;
+  options: Array<{ label: string; value: string }>;
   disabled?: boolean;
 }
 
-const TextArea: React.FC<TextAreaProps> = (props) => {
-  const {
-    label,
-    name,
-    placeholder,
-    formik,
-    rows = 3,
-    disabled = false,
-  } = props;
+const SelectField: React.FC<SelectFieldProps> = (props) => {
+  const { label, optional, name, placeholder, formik, options, disabled = false } = props;
 
   const getErrorMessage = (error: any) => {
     if (typeof error === "string") {
@@ -32,15 +25,16 @@ const TextArea: React.FC<TextAreaProps> = (props) => {
     <>
       <div className="position-relative">
       <label htmlFor={name} className="form-label fw-medium mt-3">
-          {label}
+          {label} {optional &&
+          <span className="text-secondary fw-light">
+          (optional)
+        </span>}
         </label>
-        <textarea
+        <select
           id={name}
           name={name}
-          rows={rows}
           disabled={disabled}
-          className={`rounded-3 textarea-auth d-block w-100 bg-transparent py-3 ${disabled ? "input-disabled" : ""}`}
-          placeholder={placeholder}
+          className={`rounded-3 input-auth d-block w-100 bg-transparent py-3 px-3 ${disabled ? "input-disabled" : ""}`}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values[name] || ""}
@@ -51,7 +45,16 @@ const TextArea: React.FC<TextAreaProps> = (props) => {
                 : "#E3E3E3"
             }`,
           }}
-        />
+        >
+          <option value="" disabled>
+            {placeholder}
+          </option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
         {formik.touched[name] && formik.errors[name] ? (
           <div className="text-danger error err1">
             {getErrorMessage(formik.errors[name])}
@@ -64,4 +67,4 @@ const TextArea: React.FC<TextAreaProps> = (props) => {
   );
 };
 
-export default TextArea;
+export default SelectField;

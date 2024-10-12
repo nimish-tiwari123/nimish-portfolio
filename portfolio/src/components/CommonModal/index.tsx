@@ -30,7 +30,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
         <div className="position-relative">
       <button
         className="position-absolute top-0 end-0 bg-transparent border-0"
-        onClick={onHide} // Ensures modal is closed when clicking the cross icon
+        onClick={onHide}
       >
         <RxCross2 className="text-secondary fs-4" />
       </button>
