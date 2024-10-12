@@ -32,7 +32,9 @@ header {
     color: var(--primary);
     transition: 0.3s all;
 }
-
+.header-offcanvas{
+  transition: 0.6s all !important;
+}
 @media screen and (max-width: 768px) {
     .logo-header {
         width: 150px;

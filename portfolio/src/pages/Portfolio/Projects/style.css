@@ -1,10 +1,10 @@
 .tab-button{
-    padding: 10px 30px;
+    padding: 7px 10px;
     border-radius: 50px;
     border: 1px solid #dddddc;
     background-color: #F5F5F4;
     font-weight: 500;
-    width: 150px;
+    width: 130px;
     transition: 0.5s all;
 }
 .active-tab{

@@ -30,8 +30,12 @@ const Projects = () => {
               />
               <div className="project-overlay p-3 rounded-4">
                 <div className="project-text">
-                  <h3 className="text-light fw-bold fs-4 m-0">Health Post Design</h3>
-                  <p className="text-light fw-medium m-0 mt-1">Graphic Design</p>
+                  <h3 className="text-light fw-bold fs-4 m-0">
+                    Health Post Design
+                  </h3>
+                  <p className="text-light fw-medium m-0 mt-1">
+                    Graphic Design
+                  </p>
                 </div>
               </div>
             </div>
@@ -39,7 +43,10 @@ const Projects = () => {
 
           {/* AWNS Web Project */}
           <Col md={4}>
-            <div className="project-wrapper rounded-4 mt-md-0 mt-4"  data-aos="zoom-in">
+            <div
+              className="project-wrapper rounded-4 mt-md-0 mt-4"
+              data-aos="zoom-in"
+            >
               <img
                 src={awnsweb}
                 alt="AWNS Website Development"
@@ -48,7 +55,9 @@ const Projects = () => {
               <div className="project-overlay p-3 rounded-4">
                 <div className="project-text">
                   <h3 className="text-light fw-bold fs-4 m-0">AWNS Website</h3>
-                  <p className="text-light fw-medium m-0 pt-1">Developed the frontend using Next JS</p>
+                  <p className="text-light fw-medium m-0 pt-1">
+                    Developed the frontend using Next JS
+                  </p>
                 </div>
               </div>
             </div>
@@ -56,7 +65,10 @@ const Projects = () => {
 
           {/* Fitness App Project */}
           <Col md={4}>
-            <div className="project-wrapper rounded-4 mt-md-0 mt-4"  data-aos="zoom-in">
+            <div
+              className="project-wrapper rounded-4 mt-md-0 mt-4"
+              data-aos="zoom-in"
+            >
               <img
                 src={fitnessapp}
                 alt="Fitness App"
@@ -64,8 +76,8 @@ const Projects = () => {
               />
               <div className="project-overlay p-3 rounded-4">
                 <div className="project-text">
-                  <h3  className="text-light fw-bold fs-4 m-0">Fitness App</h3>
-                  <p  className="text-light fw-medium m-0 pt-1">UI/UX Design</p>
+                  <h3 className="text-light fw-bold fs-4 m-0">Fitness App</h3>
+                  <p className="text-light fw-medium m-0 pt-1">UI/UX Design</p>
                 </div>
               </div>
             </div>
@@ -73,7 +85,7 @@ const Projects = () => {
 
           {/* AWNS Management Project */}
           <Col md={12} className="d-none d-md-block">
-            <div className="project-wrapper mt-4 rounded-4"  data-aos="zoom-in">
+            <div className="project-wrapper mt-4 rounded-4" data-aos="zoom-in">
               <img
                 src={awnsmanagement}
                 alt="AWNS Management Design"
@@ -81,7 +93,9 @@ const Projects = () => {
               />
               <div className="project-overlay p-3 rounded-4">
                 <div className="project-text">
-                  <h3 className="text-light fw-bold fs-4 m-0">AWNS Management</h3>
+                  <h3 className="text-light fw-bold fs-4 m-0">
+                    AWNS Management
+                  </h3>
                   <p className="text-light fw-medium m-0 pt-1">UI/UX Design</p>
                 </div>
               </div>
@@ -90,10 +104,9 @@ const Projects = () => {
         </Row>
 
         <div className="text-center my-4">
-        <Link to="/portfolio">
-                <SecondaryButton text="Let’s See More"/>
-              </Link>
-         
+          <Link to="/portfolio">
+            <SecondaryButton text="Let’s See More" />
+          </Link>
         </div>
       </Container>
     </section>

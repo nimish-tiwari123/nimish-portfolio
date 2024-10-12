@@ -49,3 +49,6 @@ body{
 .text-dark-custom{
     color: var(--dark);
 }
+.cursor-pointer{
+    cursor: pointer;
+}
