@@ -1,5 +1,4 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { PrimaryButton } from "../../../components";
 import { aboutme } from "../../../assets/home";
 import { design } from "../../../assets/icons";
@@ -32,12 +31,12 @@ const AboutMe = () => {
               interfaces.
             </p>
             <div className="d-none d-lg-flex align-items-center gap-3 mt-4" data-aos="fade-up">
-              <Link
-                to="/Nimish_Tiwari.pdf" 
+              <a
+                href="/Nimish_Tiwari.pdf" 
                 download="Nimish_Tiwari_CV.pdf" 
               >
                 <PrimaryButton text="Download CV" icon={true} />
-              </Link>
+              </a>
             </div>
 
             <img

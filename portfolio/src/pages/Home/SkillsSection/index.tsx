@@ -1,4 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { SecondaryButton } from "../../../components";
 import {
   design,
@@ -24,7 +25,9 @@ const SkillsSection = () => {
               My Special Skill Field Here.
             </h1>
             <div className="mt-4 d-md-block d-none" data-aos="fade-up">
+              <Link to="/connect">
               <SecondaryButton text="Hire Me" />
+              </Link>
             </div>
             <img
               src={design}

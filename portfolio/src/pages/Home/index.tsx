@@ -4,6 +4,7 @@ import Projects from "./Projects";
 import SkillsSection from "./SkillsSection";
 import {Newsletter, ConnectUs} from "../../layout";
 const Home: React.FC = () => {
+
   return (
     <div>
       <HeroSection />

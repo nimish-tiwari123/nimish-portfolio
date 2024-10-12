@@ -1,10 +1,14 @@
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { PrimaryButton } from "../../components";
 import { useFormik } from "formik";
-import { TextInput, TextArea } from "../../components"; // Assuming you have these components
+import { TextInput, TextArea , CommonModal} from "../../components"; 
 import * as Yup from "yup";
 import { call, email, location } from "../../assets/icons";
+import {success} from "../../assets/icons"; 
 import "./style.css";
+
+
 // Form validation schema using Yup
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -17,6 +21,9 @@ const validationSchema = Yup.object({
 });
 
 const ConnectUs: React.FC = () => {
+  // State to manage modal visibility
+  const [modalShow, setModalShow] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -28,9 +35,14 @@ const ConnectUs: React.FC = () => {
     validationSchema,
     onSubmit: (values) => {
       console.log("Form values:", values);
+
+      // Show modal on successful form submission
+      setModalShow(true);
+
       // Submit logic
     },
   });
+
   return (
     <section className="py-5">
       <Container>
@@ -135,7 +147,7 @@ const ConnectUs: React.FC = () => {
                     nimish.tiwari0704@gmail.com
                   </div>
                 </Col>
-              </Row>{" "}
+              </Row>
               <Row>
                 <Col className="col-2 pt-2">
                   <span className="bg-custom-primary rounded-3 px-2 py-3">
@@ -153,6 +165,15 @@ const ConnectUs: React.FC = () => {
           </Col>
         </Row>
       </Container>
+
+      {/* CommonModal Component */}
+      <CommonModal
+        show={modalShow}
+        onHide={() => setModalShow(false)} // Hide modal on close
+        title="Message Sent Successfully!"
+        body="Thank you for reaching out. I will get back to you as soon as possible."
+        success={success} // Success icon image
+      />
     </section>
   );
 };

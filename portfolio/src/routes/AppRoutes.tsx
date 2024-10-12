@@ -3,7 +3,7 @@ import { appRoutesConstants } from "./appRoutesConstants.ts";
 import { Home, Profile, Services, Portfolio, Connect, Login, AddProject, EditProject } from "../pages";
 import { Header, Footer } from "../layout/index.ts";
 import { awnsweb } from "../assets/home/projects/index.ts";
-
+import ScrollToTop from "./ScrollTop.tsx";
 const fakeProjectData = {
   title: "Sample Project",
   category: "frontend",
@@ -30,6 +30,7 @@ const AppRoutes = () => {
           path="*"
           element={
             <>
+              <ScrollToTop />
               <Header />
               <Routes>
                 <Route path={appRoutesConstants.home} element={<Home />} />

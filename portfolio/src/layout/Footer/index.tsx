@@ -93,17 +93,17 @@ const Footer: React.FC = () => {
               <li className="d-flex gap-4 mt-3 social-icons contact-flex">
                 <Link to="https://www.linkedin.com/in/nimish-tiwari-542146274" target="_blank">
                 <span>
-                <TiSocialLinkedin size={28} className="bg-light rounded-1"/>
+                <TiSocialLinkedin size={40} className="secondary-color secondary-border rounded-circle p-2"/>
                 </span>
                 </Link>
                 <Link to="https://github.com/nimish-tiwari123" target="_blank">
                 <span>
-                <PiGithubLogoFill size={28} className="bg-light rounded-1"/>
+                <PiGithubLogoFill size={40} className="secondary-color secondary-border rounded-circle p-2"/>
                 </span>
                 </Link>
                 <Link to="https://www.behance.net/nimishtiwari2" target="_blank">
                 <span>
-                <AiOutlineBehance size={28} className="bg-light rounded-1"/>
+                <AiOutlineBehance size={40} className="secondary-color secondary-border rounded-circle p-2"/>
                 </span>
                 </Link>
               </li>

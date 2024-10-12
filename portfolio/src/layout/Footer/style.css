@@ -25,6 +25,7 @@
     opacity: 100%;
 }
 
+
 @media screen and (max-width:500px){
    .contact-flex{
     justify-content: center;
