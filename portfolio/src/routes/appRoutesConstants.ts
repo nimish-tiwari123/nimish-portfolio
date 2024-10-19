@@ -8,6 +8,6 @@ export const appRoutesConstants = {
   connect: "/connect",
   login:"/login",
   addproject: "/addproject",
-  editproject: "/editproject",
+  editproject: "/editproject/:id",
 
 };

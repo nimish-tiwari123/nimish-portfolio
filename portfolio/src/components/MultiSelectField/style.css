@@ -1,0 +1,14 @@
+.css-13cymwt-control , .css-t3ipsp-control{
+    padding: 7px 5px;
+    border-radius: 7px !important;
+    border: 1px solid #e6e6e6 !important;
+    font-size: 13px;
+}
+
+ .css-t3ipsp-control{
+    padding: 7px 5px;
+    border-radius: 7px !important;
+    border: 1px solid var(--secondary) !important;
+    font-size: 13px;
+    box-shadow: none !important;
+}

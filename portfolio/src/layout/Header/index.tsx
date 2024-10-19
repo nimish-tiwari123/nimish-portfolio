@@ -1,18 +1,29 @@
 import { Container, Navbar, Nav, Offcanvas } from "react-bootstrap";
-import { NavLink, useNavigate, Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { logo } from "../../assets"; 
-import { PrimaryButton, SecondaryButton } from "../../components";
+import { logo } from "../../assets";
+import { PrimaryButton, SecondaryButton, LogoutModal } from "../../components";
 import "./style.css";
 
 const Header: React.FC = () => {
   const [show, setShow] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [showLogoutModal, setShowLogoutModal] = useState(false); // State for Logout Modal
+
+  // Handle Logout Modal
+  const handleShowLogoutModal = () => setShowLogoutModal(true);
+  const handleCloseLogoutModal = () => setShowLogoutModal(false);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    handleCloseLogoutModal();
+    window.location.reload();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,7 +80,7 @@ const Header: React.FC = () => {
                       className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
-                      onClick={handleClose} 
+                      onClick={handleClose}
                     >
                       HOME
                     </NavLink>
@@ -78,7 +89,7 @@ const Header: React.FC = () => {
                       className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
-                      onClick={handleClose} 
+                      onClick={handleClose}
                     >
                       PROFILE
                     </NavLink>
@@ -87,7 +98,7 @@ const Header: React.FC = () => {
                       className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
-                      onClick={handleClose} 
+                      onClick={handleClose}
                     >
                       SERVICES
                     </NavLink>
@@ -96,7 +107,7 @@ const Header: React.FC = () => {
                       className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
-                      onClick={handleClose} 
+                      onClick={handleClose}
                     >
                       PORTFOLIO
                     </NavLink>
@@ -105,14 +116,25 @@ const Header: React.FC = () => {
                       className={({ isActive }: { isActive: boolean }) =>
                         isActive ? "header-nav active-nav" : "header-nav"
                       }
-                      onClick={handleClose} 
+                      onClick={handleClose}
                     >
                       CONNECT
                     </NavLink>
+                    {!userId ? (
+                      <Link to="/login">
+                        <SecondaryButton text="Login" />
+                      </Link>
+                    ) : (
+                    <div>
+                        <button
+                        className="py-2 px-4 rounded-pill green-border secondary-btn fw-medium "
+                        onClick={handleShowLogoutModal}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                    )}
 
-                    <Link to="/login">
-                      <SecondaryButton text="Login" />
-                    </Link>
                     <Link to="/connect">
                       <PrimaryButton text="Hire Me" />
                     </Link>
@@ -165,9 +187,18 @@ const Header: React.FC = () => {
               </Nav>
 
               <div className="d-none d-lg-flex align-items-center gap-3">
-                <Link to="/login">
-                  <SecondaryButton text="Login" />
-                </Link>
+                {!userId ? (
+                  <Link to="/login">
+                    <SecondaryButton text="Login" />
+                  </Link>
+                ) : (
+                  <button
+                    className="py-2 px-4 rounded-pill green-border secondary-btn fw-medium"
+                    onClick={handleShowLogoutModal}
+                  >
+                    Logout
+                  </button>
+                )}
                 <Link to="/connect">
                   <PrimaryButton text="Hire Me" />
                 </Link>
@@ -176,6 +207,14 @@ const Header: React.FC = () => {
           </Navbar>
         </Container>
       </header>
+      {/* Logout Modal */}
+      <LogoutModal
+        show={showLogoutModal}
+        onHide={handleCloseLogoutModal}
+        title="Are you sure you want to logout?"
+        body="Click Yes to logout, or Cancel to stay logged in."
+        onLogout={handleLogout}
+      />
     </>
   );
 };

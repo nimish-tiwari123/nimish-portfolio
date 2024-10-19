@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Dropzone from "react-dropzone";
 import {
@@ -7,24 +8,32 @@ import {
   TextArea,
   SelectField,
   PrimaryButton,
-  CommonModal
+  CommonModal,
+  MultiSelectField,
+  Loader
 } from "../../../../components";
 import { BsCloudUpload } from "react-icons/bs";
 import * as Yup from "yup";
 import HeroSection from "./HeroSection";
 import { success } from "../../../../assets/icons";
+import { useAddProjectMutation } from "../../../../apis/service";
 import "./style.css";
 
 const AddProject = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [useAddProject, { isLoading }] = useAddProjectMutation();
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Project Title is required"),
-    category: Yup.string().required("Project Category is required"),
-    projectStatus: Yup.string().required("Project Status is required"),
+    category: Yup.array()
+      .min(1, "At least one Project Category is required")
+      .required("Project Category is required"),
+    status: Yup.string().required("Project Status is required"),
     description: Yup.string().required("Project Description is required"),
     image: Yup.mixed().required("Product Image is required"),
   });
+  
 
   const formik = useFormik({
     initialValues: {
@@ -32,30 +41,71 @@ const AddProject = () => {
       category: "",
       tools: "",
       technologies: "",
-      projectUrl: "",
-      projectStatus: "",
+      url: "",
+      status: "",
       description: "",
-      image: null, // Add image to initial values
+      image: null,
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Form values:", values);
-      setShowModal(true); 
-      formik.resetForm();
-      setSelectedImage(null);
+    onSubmit: async (values) => {
+      try {
+        // Create FormData
+        const formData = new FormData();
+        formData.append("title", values.title);
+        formData.append("category", values.category);
+        formData.append("tools", values.tools || ""); // Optional field
+        formData.append("technologies", values.technologies || ""); // Optional field
+        formData.append("url", values.url || ""); // Optional field
+        formData.append("status", values.status);
+        formData.append("description", values.description);
+        if (selectedImage) {
+          formData.append("image", selectedImage); // Append the image
+        }
+
+        // Send formData to the API
+        const response = await useAddProject(formData); // Wait for the API response
+        if (response) {
+          setShowModal(true); 
+           navigate("/portfolio")
+          setSelectedImage(null);
+        } else {
+          alert(response);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
 
   const categoryOptions = [
-    { label: "Frontend Development", value: "frontend" },
-    { label: "UI/UX Design", value: "uiux" },
-    { label: "Graphic Design", value: "graphic" },
+    { label: "Frontend Development", value: "Frontend Development" },
+    { label: "UI/UX Design", value: "UI/UX Design" },
+    { label: "Graphic Design", value: "Graphic Design" },
   ];
-
+  const technologyOptions = [
+    { label: "React JS", value: "React JS" },
+    { label: "Next JS", value: "Next JS" },
+    { label: "HTML", value: "HTML" },
+    { label: "CSS", value: "CSS" },
+    { label: "JavaScript", value: "JavaScript" },
+    { label: "TypeScript", value: "TypeScript" },
+    { label: "Angular", value: "Angular" },
+    { label: "Git", value: "Git" },
+    { label: "Github", value: "Github" },
+    { label: "Bootstrap", value: "Bootstrap" },
+  ];
+  
+  const toolsOptions = [
+    { label: "Adobe Illustrator", value: "Adobe Illustrator" },
+    { label: "Adobe Photoshop", value: "Adobe Photoshop" },
+    { label: "Figma", value: "Figma" },
+    { label: "Canva", value: "Canva" },
+  ];
+  
   const statusOptions = [
-    { label: "In Progress", value: "in_progress" },
-    { label: "Completed", value: "completed" },
-    { label: "On Hold", value: "on_hold" },
+    { label: "In Progress", value: "In Progress" },
+    { label: "Completed", value: "Completed" },
+    { label: "Pending", value: "Pending" },
   ];
 
   const handleDrop = (acceptedFiles: File[]) => {
@@ -71,6 +121,7 @@ const AddProject = () => {
   return (
     <>
       <HeroSection />
+      {isLoading && <Loader />}
       <Container className="p-md-5 p-3 pt-5">
         <h1 className="primary-font fw-bold text-center">Add New Project</h1>
         <form onSubmit={formik.handleSubmit} className="p-md-5 p-0 m-md-5 m-0">
@@ -84,7 +135,7 @@ const AddProject = () => {
               />
             </Col>
             <Col md={6}>
-              <SelectField
+              <MultiSelectField
                 label="Project Category"
                 name="category"
                 placeholder="Select Project Category"
@@ -93,28 +144,31 @@ const AddProject = () => {
               />
             </Col>{" "}
             <Col md={6}>
-              <TextInput
+              <MultiSelectField
                 label="Tools"
                 optional={true}
                 name="tools"
                 placeholder="Enter Tools Used"
                 formik={formik}
+                options={toolsOptions}
+               
               />
             </Col>
             <Col md={6}>
-              <TextInput
+              <MultiSelectField
                 label="Technologies"
                 optional={true}
                 name="technologies"
                 placeholder="Enter Technologies"
                 formik={formik}
+                options={technologyOptions}
               />
             </Col>
             <Col md={6}>
               <TextInput
                 label="Project URL"
                 optional={true}
-                name="projectUrl"
+                name="url"
                 placeholder="Enter Project URL"
                 formik={formik}
               />
@@ -122,7 +176,7 @@ const AddProject = () => {
             <Col md={6}>
               <SelectField
                 label="Project Status"
-                name="projectStatus"
+                name="status"
                 placeholder="Select Project Status"
                 formik={formik}
                 options={statusOptions}
@@ -136,14 +190,15 @@ const AddProject = () => {
                 formik={formik}
               />
             </Col>
-
             {/* Product Image Field */}
             <Col md={12}>
               <div className="mb-4">
-                <label className="form-label fw-medium mt-3">Product Image</label>
+                <label className="form-label fw-medium mt-3">
+                  Product Image
+                </label>
                 <Dropzone
                   onDrop={handleDrop}
-                  accept={{ 'image/*': [] }} // Correctly specify accepted file types
+                  accept={{ "image/*": [] }}
                   multiple={false}
                 >
                   {({ getRootProps, getInputProps }) => (
@@ -157,8 +212,11 @@ const AddProject = () => {
                           <BsCloudUpload size={30} className="opacity-75" />
                           <p className="mt-3 m-0">Drag and Drop here</p>
                           <p className="opacity-50">or</p>
-                          <button type="button" className="text-light rounded-pill py-2 px-4 bg-custom-primary border-0">
-                           Browse
+                          <button
+                            type="button"
+                            className="text-light rounded-pill py-2 px-4 bg-custom-primary border-0"
+                          >
+                            Browse
                           </button>
                         </div>
                       ) : (
@@ -166,7 +224,7 @@ const AddProject = () => {
                           <img
                             src={URL.createObjectURL(selectedImage)}
                             alt="Selected"
-                            onClick={() => setSelectedImage(null)} 
+                            onClick={() => setSelectedImage(null)}
                             className="w-100 rounded-4 border cursor-pointer dropzone-img"
                           />
                         </div>

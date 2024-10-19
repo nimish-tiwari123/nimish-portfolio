@@ -1,4 +1,4 @@
-import { Modal, Button, Container, Row, Col } from "react-bootstrap";
+import { Modal, Container, Row, Col } from "react-bootstrap";
 import { RxCross1 } from "react-icons/rx";
 
 interface ProjectModalProps {
@@ -18,6 +18,7 @@ const ProjectView: React.FC<ProjectModalProps> = ({
   onHide,
   project,
 }) => {
+  console.log(project)
   return (
     <Modal show={show} onHide={onHide} size="xl" centered>
       <Modal.Body className="p-0">
@@ -41,7 +42,7 @@ const ProjectView: React.FC<ProjectModalProps> = ({
               </h3>
               <p className="opacity-75">{project.description}</p>
               <p>
-                Tools / Technologies Used:{" "}
+                Tools / Technologies Used:
                 <span className="fw-bold"> {project.tools}</span>
               </p>
               {project.status == "Completed" && (

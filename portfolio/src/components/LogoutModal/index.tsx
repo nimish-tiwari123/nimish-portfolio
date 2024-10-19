@@ -1,21 +1,22 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
+import { PiWarningCircle } from "react-icons/pi";
 
 interface CommonModalProps {
   show: boolean;
   onHide: () => void;
   title: string;
   body: string;
-  success: string;
+  onLogout: () => void; // Add this prop
 }
 
-const CommonModal: React.FC<CommonModalProps> = ({
+const LogoutModal: React.FC<CommonModalProps> = ({
   show,
   onHide,
   title,
   body,
-  success,
+  onLogout, // Destructure the new prop
 }) => {
   return (
     <Modal show={show} onHide={onHide}>
@@ -28,9 +29,17 @@ const CommonModal: React.FC<CommonModalProps> = ({
             <RxCross2 className="text-secondary fs-4" />
           </button>
           <div className="p-4 text-center">
-            <img src={success} alt="success" className="mb-3" />
+           <PiWarningCircle size={50} className="text-danger"/>
             <h1 className="fs-5 mt-3 fw-bold">{title}</h1>
             <p className="text-secondary mt-2 w-75 mx-auto">{body}</p>
+            <div className="d-flex justify-content-center gap-3 mt-4">
+              <button className="btn rounded-pill px-4 py-2 border bg-secondary-subtle" onClick={onHide}>
+                Cancel
+              </button>
+              <button className="btn rounded-pill px-4 py-2 border bg-danger text-light" onClick={onLogout}>
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </Modal.Body>
@@ -38,4 +47,4 @@ const CommonModal: React.FC<CommonModalProps> = ({
   );
 };
 
-export default CommonModal;
+export default LogoutModal;

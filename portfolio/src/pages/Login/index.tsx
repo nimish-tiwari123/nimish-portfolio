@@ -1,48 +1,68 @@
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { Container, Row, Col } from 'react-bootstrap';
-import { Formik, Form } from 'formik';
+import { Container, Row, Col } from "react-bootstrap";
+import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
-import * as Yup from 'yup';
-import { login } from '../../assets';
-import TextInput from '../../components/TextInput'; // Import your common TextInput component
+import * as Yup from "yup";
+import { login } from "../../assets";
+import {TextInput, Loader} from "../../components";
+import { useUserLoginMutation } from "../../apis/service";
 import "./style.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [userLogin, { isLoading, data }] = useUserLoginMutation();
+
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required'),
+      .email("Invalid email address")
+      .required("Email is required"),
     password: Yup.string()
-      .min(6, 'Password must be at least 6 characters long')
-      .required('Password is required'),
+      .min(6, "Password must be at least 6 characters long")
+      .required("Password is required"),
   });
 
-  const handleSubmit = (values: { email: string; password: string }) => {
-    console.log('Form submitted:', values);
-  };
+
+const handleSubmit = async (values: { email: string; password: string }) => {
+  try {
+    const response = await userLogin(values).unwrap();
+    console.log("Login successful", data);
+    localStorage.setItem("userId", response?.user);
+    localStorage.setItem("accessToken", response?.tokens?.access);
+    navigate("/");
+  } catch (error) {
+    console.error("Login failed", error);
+  }
+};
 
   return (
     <Container fluid className="py-5 login-container">
-      <button className="bg-transparent border-0 position-absolute top-0 start-0" onClick={() => navigate("/")}>
+      {isLoading && <Loader/>}
+      <button
+        className="bg-transparent border-0 position-absolute top-0 start-0"
+        onClick={() => navigate("/")}
+      >
         <IoIosArrowRoundBack size={50} className="m-2 text-secondary" />
       </button>
 
       <Container className="py-3 h-100">
-        <Row className='h-100'>
+        <Row className="h-100">
           <Col md={5}>
             <div className="bg-white rounded-4 p-md-5 p-0 form-container">
-              <h1 className="fw-bold primary-font text-center display-4">Login</h1>
-              <p className="fw-medium primary-color text-center">Access Your Account</p>
+              <h1 className="fw-bold primary-font text-center display-4">
+                Login
+              </h1>
+              <p className="fw-medium primary-color text-center">
+                Access Your Account
+              </p>
 
               <Formik
-                initialValues={{ email: '', password: '' }}
+                initialValues={{ email: "", password: "" }}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
               >
                 {(formik) => (
-                  <Form className='py-4 w-100'>
+                  <Form className="py-4 w-100">
                     <div className="mb-3">
                       <TextInput
                         label="Your Email"
