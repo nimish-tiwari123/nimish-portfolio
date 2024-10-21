@@ -40,6 +40,14 @@ export const service = createApi({
         method: "GET",
        
       }),
+    
+    }),
+    deleteProject: builder.mutation({
+      query: (projectId) => ({
+        url: `projects/${projectId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Project"],
     }),
   }),
 });
@@ -47,5 +55,6 @@ export const service = createApi({
 export const {
   useUserLoginMutation,
   useAddProjectMutation, 
-  useViewProjectQuery
+  useViewProjectQuery,
+  useDeleteProjectMutation
 } = service;

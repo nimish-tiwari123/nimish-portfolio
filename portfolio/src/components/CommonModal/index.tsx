@@ -18,7 +18,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
   success,
 }) => {
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal show={show} onHide={onHide} centered>
       <Modal.Body>
         <div className="position-relative">
           <button

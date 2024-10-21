@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { healthpost } from "../../../assets/home/projects";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import ProjectView from "./Modals/ProjectView";
-import { PrimaryButton, Loader} from "../../../components";
+import DeleteProject from "./Modals/DeleteProject"; // Import the modal
+import { PrimaryButton, Loader } from "../../../components";
 import { nodata } from "../../../assets";
 import { useViewProjectQuery } from "../../../apis/service";
 import { MdEdit, MdDelete } from "react-icons/md";
@@ -12,9 +13,10 @@ import "./style.css";
 
 const Projects = () => {
   const [activeTab, setActiveTab] = useState("All");
-  const [showModal, setShowModal] = useState(false);
-  const userId = localStorage.getItem("userId");
+  const [showViewModal, setShowViewModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const userId = localStorage.getItem("userId");
   const { data, isLoading } = useViewProjectQuery(activeTab);
   const navigate = useNavigate();
 
@@ -22,29 +24,26 @@ const Projects = () => {
     setActiveTab(tab);
   };
 
-  const handleModalOpen = (project: any) => {
+  const handleViewModalOpen = (project: any) => {
     setSelectedProject(project);
-    setShowModal(true);
+    setShowViewModal(true);
+  };
+
+  const handleDeleteModalOpen = (project: any) => {
+    setSelectedProject(project);
+    setShowDeleteModal(true);
   };
 
   const handleModalClose = () => {
-    setShowModal(false);
+    setShowViewModal(false);
+    setShowDeleteModal(false);
     setSelectedProject(null);
-  };
-
-  const projectData = {
-    image: healthpost,
-    title: "Health Post Design",
-    description:
-      "This is a health post design that focuses on graphic elements for healthcare campaigns.",
-    tools: "Adobe Illustrator, Photoshop",
-    status: "Completed",
   };
 
   return (
     <>
       <section>
-        {isLoading && <Loader/>}
+        {isLoading && <Loader />}
         <Container>
           <h5 className="primary-color fw-medium mt-5 text-center">
             My Portfolio
@@ -52,43 +51,9 @@ const Projects = () => {
           <h1 className="fw-bold primary-font text-center display-4">
             My Complete Projects
           </h1>
-          <Container className="tabs-container d-flex flex-wrap justify-content-center gap-3 my-5 py-4">
-            <button
-              className={`tab-button ${
-                activeTab === "All" ? "active-tab" : "deactive-tab"
-              }`}
-              onClick={() => handleTabClick("All")}
-            >
-              All
-            </button>
-            <button
-              className={`tab-button ${
-                activeTab === "Frontend" ? "active-tab" : "deactive-tab"
-              }`}
-              onClick={() => handleTabClick("Frontend")}
-            >
-              Frontend
-            </button>
-            <button
-              className={`tab-button ${
-                activeTab === "UI/UX" ? "active-tab" : "deactive-tab"
-              }`}
-              onClick={() => handleTabClick("UI/UX")}
-            >
-              UI/UX
-            </button>
-            <button
-              className={`tab-button ${
-                activeTab === "Graphic" ? "active-tab" : "deactive-tab"
-              }`}
-              onClick={() => handleTabClick("Graphic")}
-            >
-              Graphic
-            </button>
-          </Container>
-
           <Container className="tab-content my-5">
-            {activeTab === "All" && (
+
+          {activeTab === "All" && (
               <Row className="py-5 mt-md-5 mt-3">
                 {data?.projects?.map((item: any) => (
                   <Col md={4}>
@@ -99,12 +64,20 @@ const Projects = () => {
                      {userId &&
                      (
                       <div className="position-absolute end-0 top-0 p-3 d-flex gap-2 z-1">
-                      <button className="action-btn border-0 rounded-circle p-2 bg-white d-flex justify-content-center align-items-center" onClick={()=>navigate(`/editproject/:${item._id}`)}>
-                        <MdEdit className="text-success" size={16} />
-                      </button>
-                      <button className="action-btn border-0 rounded-circle p-2 bg-white d-flex justify-content-center align-items-center">
-                        <MdDelete className="text-danger" size={16} />
-                      </button>
+                      <button
+                            className="action-btn border-0 rounded-circle p-2 bg-white d-flex justify-content-center align-items-center"
+                            onClick={() =>
+                              navigate(`/editproject/:${item._id}`)
+                            }
+                          >
+                            <MdEdit className="text-success" size={16} />
+                          </button>
+                          <button
+                            className="action-btn border-0 rounded-circle p-2 bg-white d-flex justify-content-center align-items-center"
+                            onClick={() => handleDeleteModalOpen(item)}
+                          >
+                            <MdDelete className="text-danger" size={16} />
+                          </button>
                     </div>
                      )
                      }
@@ -136,6 +109,9 @@ const Projects = () => {
                 ))}
               </Row>
             )}
+         
+           
+
             {activeTab === "Frontend" && (
               <div>
                 <img
@@ -163,24 +139,34 @@ const Projects = () => {
                 />
               </div>
             )}
+
+            {userId && (
+              <div className="d-flex justify-content-center">
+                <Link to="/addproject">
+                  <PrimaryButton text="+ Add Project" />
+                </Link>
+              </div>
+            )}
           </Container>
-          {userId && (
-          <div className="d-flex justify-content-center">
-            <Link to="/addproject">
-              <PrimaryButton text="+ Add Project" />
-            </Link>
-          </div>
+
+          {/* Delete Modal */}
+          {selectedProject && (
+            <DeleteProject
+              show={showDeleteModal}
+              onHide={handleModalClose}
+              project={selectedProject}
+            />
+          )}
+
+          {/* Project View Modal */}
+          {selectedProject && (
+            <ProjectView
+              show={showViewModal}
+              onHide={handleModalClose}
+              project={selectedProject}
+            />
           )}
         </Container>
-
-        {/* Modal for project details */}
-        {selectedProject && (
-          <ProjectView
-            show={showModal}
-            onHide={handleModalClose}
-            project={selectedProject}
-          />
-        )}
       </section>
     </>
   );
