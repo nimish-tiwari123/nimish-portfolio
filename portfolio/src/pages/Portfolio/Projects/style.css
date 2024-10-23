@@ -16,9 +16,9 @@
     border: 1.5px solid white;
 }
 .no-project-img{
-    width: 40%;
+    width: 40% !important;
 }
-.project-image{
+.project-image-port{
     height: 300px;
     object-fit: contain;
 }
@@ -29,6 +29,6 @@
 
 @media screen and (max-width:600px) {
     .no-project-img{
-        width: 80%;
+        width: 80% !important;
     } 
 }

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { healthpost } from "../../../assets/home/projects";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import ProjectView from "./Modals/ProjectView";
 import DeleteProject from "./Modals/DeleteProject"; // Import the modal
@@ -17,7 +16,7 @@ const Projects = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const userId = localStorage.getItem("userId");
-  const { data, isLoading } = useViewProjectQuery(activeTab);
+  const { data, isLoading , isFetching} = useViewProjectQuery(activeTab);
   const navigate = useNavigate();
 
   const handleTabClick = (tab: string) => {
@@ -43,7 +42,7 @@ const Projects = () => {
   return (
     <>
       <section>
-        {isLoading && <Loader />}
+        {(isFetching || isLoading) && <Loader />}
         <Container>
           <h5 className="primary-color fw-medium mt-5 text-center">
             My Portfolio
@@ -51,10 +50,49 @@ const Projects = () => {
           <h1 className="fw-bold primary-font text-center display-4">
             My Complete Projects
           </h1>
-          <Container className="tab-content my-5">
+          <Container className="tabs-container d-flex flex-wrap justify-content-center gap-3 mt-5 py-4">
+            <button
+              className={`tab-button ${
+                activeTab === "All" ? "active-tab" : "deactive-tab"
+              }`}
+              onClick={() => handleTabClick("All")}
+            >
+              All
+            </button>
+            <button
+              className={`tab-button ${
+                activeTab === "Frontend" ? "active-tab" : "deactive-tab"
+              }`}
+              onClick={() => handleTabClick("Frontend")}
+            >
+              Frontend
+            </button>
+            <button
+              className={`tab-button ${
+                activeTab === "UI/UX" ? "active-tab" : "deactive-tab"
+              }`}
+              onClick={() => handleTabClick("UI/UX")}
+            >
+              UI/UX
+            </button>
+            <button
+              className={`tab-button ${
+                activeTab === "Graphic" ? "active-tab" : "deactive-tab"
+              }`}
+              onClick={() => handleTabClick("Graphic")}
+            >
+              Graphic
+            </button>
+          </Container>
 
-          {activeTab === "All" && (
-              <Row className="py-5 mt-md-5 mt-3">
+          <Container className="tab-content my-5">
+        
+              <Row className="py-5  mt-3">
+                {data?.projects?.length <=0 &&  <img
+                  src={nodata}
+                  alt="No Project"
+                  className="no-project-img d-block m-auto"
+                />}
                 {data?.projects?.map((item: any) => (
                   <Col md={4}>
                     <div
@@ -67,7 +105,7 @@ const Projects = () => {
                       <button
                             className="action-btn border-0 rounded-circle p-2 bg-white d-flex justify-content-center align-items-center"
                             onClick={() =>
-                              navigate(`/editproject/:${item._id}`)
+                              navigate(`/editproject/${item._id}`)
                             }
                           >
                             <MdEdit className="text-success" size={16} />
@@ -84,7 +122,7 @@ const Projects = () => {
                       <img
                         src={item.image}
                         alt="Post Design"
-                        className="w-100 border rounded-4 project-image"
+                        className="w-100 border rounded-4 project-image-port"
                       />
                       <div className="project-overlay pb-4 px-3 rounded-4 d-flex justify-content-between flex-row align-items-end">
                         <div className="project-text">
@@ -99,7 +137,7 @@ const Projects = () => {
                         </div>
                         <button
                           className="project-view-btn text-light bg-transparent rounded-pill px-3 py-1"
-                          onClick={() => handleModalOpen(item)}
+                          onClick={() => handleViewModalOpen(item)}
                         >
                           <IoIosArrowRoundForward size={30} />
                         </button>
@@ -108,37 +146,8 @@ const Projects = () => {
                   </Col>
                 ))}
               </Row>
-            )}
-         
            
-
-            {activeTab === "Frontend" && (
-              <div>
-                <img
-                  src={nodata}
-                  alt="No Project"
-                  className="no-project-img d-block m-auto"
-                />
-              </div>
-            )}
-            {activeTab === "UI/UX" && (
-              <div>
-                <img
-                  src={nodata}
-                  alt="No Project"
-                  className="no-project-img d-block m-auto"
-                />
-              </div>
-            )}
-            {activeTab === "Graphic" && (
-              <div>
-                <img
-                  src={nodata}
-                  alt="No Project"
-                  className="no-project-img d-block m-auto"
-                />
-              </div>
-            )}
+           
 
             {userId && (
               <div className="d-flex justify-content-center">

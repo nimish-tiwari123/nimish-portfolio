@@ -3,8 +3,8 @@ import { Modal, Container, Row } from "react-bootstrap";
 import { RxCross1 } from "react-icons/rx";
 import { useDeleteProjectMutation } from "../../../../apis/service";
 import { PiWarningCircle } from "react-icons/pi";
-import { Loader, CommonModal } from "../../../../components";
-import { success } from "../../../../assets/icons";
+import { Loader } from "../../../../components";
+import toast from "react-hot-toast";
 
 interface ProjectModalProps {
   show: boolean;
@@ -20,22 +20,18 @@ const DeleteProject: React.FC<ProjectModalProps> = ({
   onHide,
   project,
 }) => {
-  const [modalShow, setModalShow] = useState(false);
   const [deleteProject, { isLoading: isDeleting }] = useDeleteProjectMutation();
 
   const handleDelete = async () => {
     try {
       await deleteProject(project._id).unwrap();
-      setModalShow(true); // Show success modal first
+      onHide();
+     toast.success("Project Deleted Successfully!");
     } catch (error) {
       console.error("Error deleting project:", error);
     }
   };
 
-  const handleCloseSuccessModal = () => {
-    setModalShow(false); // Close success modal
-    onHide(); // Close the DeleteProject modal only after success modal closes
-  };
 
   return (
     <>
@@ -78,14 +74,7 @@ const DeleteProject: React.FC<ProjectModalProps> = ({
         </Modal.Body>
       </Modal>
 
-      {/* Success Modal */}
-      <CommonModal
-        show={modalShow}
-        onHide={handleCloseSuccessModal} 
-        title="Project Deleted Successfully!"
-        body="Your project has been successfully updated. All changes have been saved and reflected in your portfolio."
-        success={success}
-      />
+  
     </>
   );
 };

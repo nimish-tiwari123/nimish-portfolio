@@ -2,23 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { appRoutesConstants } from "./appRoutesConstants.ts";
 import { Home, Profile, Services, Portfolio, Connect, Login, AddProject, EditProject } from "../pages";
 import { Header, Footer } from "../layout/index.ts";
-import { awnsweb } from "../assets/home/projects/index.ts";
+import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./ScrollTop.tsx";
-const fakeProjectData = {
-  title: "Sample Project",
-  category: "frontend",
-  tools: "React, TypeScript",
-  technologies: "React, Redux, Node.js",
-  projectUrl: "http://example.com",
-  projectStatus: "in_progress",
-  description: "A sample project for demonstration purposes",
-  image: awnsweb,
-};
 
-// Mock onUpdate function
-const handleUpdate = (updatedData: any) => {
-  console.log("Updated project data:", updatedData);
-};
+
 
 const AppRoutes = () => {
   return (
@@ -43,9 +30,10 @@ const AppRoutes = () => {
                 {/* Pass mock data to EditProject */}
                 <Route
                   path={appRoutesConstants.editproject}
-                  element={<EditProject projectData={fakeProjectData} onUpdate={handleUpdate} />}
+                  element={<EditProject/>}
                 />
               </Routes>
+              <Toaster position="top-right" reverseOrder={false} />
               <Footer />
             </>
           }

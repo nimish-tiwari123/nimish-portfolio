@@ -1,79 +1,127 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom"; // Import useParams
 import Dropzone from "react-dropzone";
 import {
   TextInput,
   TextArea,
   SelectField,
   PrimaryButton,
-  CommonModal
+  CommonModal,
+  Loader,
+  MultiSelectField
 } from "../../../../components";
+import { toast } from "react-hot-toast";
 import { BsCloudUpload } from "react-icons/bs";
 import * as Yup from "yup";
 import HeroSection from "./HeroSection";
 import { success } from "../../../../assets/icons";
+import { useViewProjectByIdQuery, useUpdateProjectMutation } from "../../../../apis/service"; // Import the API hook
 import "./style.css";
 
-interface ProjectData {
-  title: string;
-  category: string;
-  tools?: string;
-  technologies?: string;
-  projectUrl?: string;
-  projectStatus: string;
-  description: string;
-  image?: File | string | null; // Allow string for default image URL
-}
 
-interface EditProjectProps {
-  projectData: ProjectData;
-  onUpdate: (updatedData: ProjectData) => void;
-}
+const EditProject: React.FC = () => {
+  const { projectId } = useParams<{ projectId: string }>(); // Extract projectId from URL
+  const { data, isLoading: viewLoading } = useViewProjectByIdQuery(projectId); 
+  const [useUpdateProject, { isLoading: updateLoading }] = useUpdateProjectMutation();
+  let projectData = data?.project;
+  const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState<File | string | null>(projectData?.image || null);
 
-const EditProject: React.FC<EditProjectProps> = ({ projectData, onUpdate }) => {
-  const [selectedImage, setSelectedImage] = useState<File | string | null>(projectData.image || null);
+
   const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    if (projectData?.image) {
+      setSelectedImage(projectData.image);
+    }
+  }, [projectData]);
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Project Title is required"),
-    category: Yup.string().required("Project Category is required"),
+    category: Yup.mixed().required("Project Category is required"),
     projectStatus: Yup.string().required("Project Status is required"),
     description: Yup.string().required("Project Description is required"),
     image: Yup.mixed().required("Product Image is required"),
   });
 
+
   const formik = useFormik({
     initialValues: {
-      title: projectData.title || "",
-      category: projectData.category || "",
-      tools: projectData.tools || "",
-      technologies: projectData.technologies || "",
-      projectUrl: projectData.projectUrl || "",
-      projectStatus: projectData.projectStatus || "",
-      description: projectData.description || "",
-      image: projectData.image || null,
+      title: projectData?.title || "",
+      category: projectData?.category || "",
+      tools: projectData?.tools || "",
+      technologies: projectData?.technologies || "",
+      projectUrl: projectData?.projectUrl || "",
+      projectStatus: projectData?.status || "",
+      description: projectData?.description || "",
+      image: projectData?.image || null,
     },
+    enableReinitialize: true, // Reinitialize form values when data changes
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Updated Form values:", values);
-      onUpdate(values); // Call the onUpdate function passed as prop
-      setShowModal(true);
-      formik.resetForm();
-      setSelectedImage(null);
+    onSubmit: async (values) => {
+      try {
+        // Create FormData
+        const formData = new FormData();
+        formData.append("title", values.title);
+        formData.append("category", values.category);
+        formData.append("tools", values.tools || ""); // Optional field
+        formData.append("technologies", values.technologies || ""); // Optional field
+        formData.append("url", values.projectUrl || ""); // Optional field
+        formData.append("status", values.projectStatus);
+        formData.append("description", values.description);
+        if (selectedImage) {
+          formData.append("image", selectedImage); // Append the image
+        }
+
+        const obj ={
+          formData, projectId
+        }
+        // Send formData to the API
+        const response = await useUpdateProject(obj); 
+        if (response) {
+          setShowModal(true); 
+           navigate("/portfolio");
+           toast.success("Project Updated Successfully")
+          setSelectedImage(null);
+        } else {
+          alert(response);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
 
   const categoryOptions = [
-    { label: "Frontend Development", value: "frontend" },
-    { label: "UI/UX Design", value: "uiux" },
-    { label: "Graphic Design", value: "graphic" },
+    { label: "Frontend Development", value: "Frontend Development" },
+    { label: "UI/UX Design", value: "UI/UX Design" },
+    { label: "Graphic Design", value: "Graphic Design" },
   ];
-
+  const technologyOptions = [
+    { label: "React JS", value: "React JS" },
+    { label: "Next JS", value: "Next JS" },
+    { label: "HTML", value: "HTML" },
+    { label: "CSS", value: "CSS" },
+    { label: "JavaScript", value: "JavaScript" },
+    { label: "TypeScript", value: "TypeScript" },
+    { label: "Angular", value: "Angular" },
+    { label: "Git", value: "Git" },
+    { label: "Github", value: "Github" },
+    { label: "Bootstrap", value: "Bootstrap" },
+  ];
+  
+  const toolsOptions = [
+    { label: "Adobe Illustrator", value: "Adobe Illustrator" },
+    { label: "Adobe Photoshop", value: "Adobe Photoshop" },
+    { label: "Figma", value: "Figma" },
+    { label: "Canva", value: "Canva" },
+  ];
+  
   const statusOptions = [
-    { label: "In Progress", value: "in_progress" },
-    { label: "Completed", value: "completed" },
-    { label: "On Hold", value: "on_hold" },
+    { label: "In Progress", value: "In Progress" },
+    { label: "Completed", value: "Completed" },
+    { label: "Pending", value: "Pending" },
   ];
 
   const handleDrop = (acceptedFiles: File[]) => {
@@ -82,8 +130,8 @@ const EditProject: React.FC<EditProjectProps> = ({ projectData, onUpdate }) => {
   };
 
   const handleReset = () => {
-    formik.resetForm(); 
-    setSelectedImage(null); 
+    formik.resetForm();
+    setSelectedImage(null);
   };
 
   useEffect(() => {
@@ -93,8 +141,10 @@ const EditProject: React.FC<EditProjectProps> = ({ projectData, onUpdate }) => {
     }
   }, [selectedImage]);
 
+
   return (
     <>
+    {(viewLoading || updateLoading) && <Loader/>}
       <HeroSection />
       <Container className="p-md-5 p-3 pt-5">
         <h1 className="primary-font fw-bold text-center">Edit Project</h1>
@@ -109,7 +159,7 @@ const EditProject: React.FC<EditProjectProps> = ({ projectData, onUpdate }) => {
               />
             </Col>
             <Col md={6}>
-              <SelectField
+              <MultiSelectField
                 label="Project Category"
                 name="category"
                 placeholder="Select Project Category"
@@ -118,21 +168,24 @@ const EditProject: React.FC<EditProjectProps> = ({ projectData, onUpdate }) => {
               />
             </Col>{" "}
             <Col md={6}>
-              <TextInput
+              <MultiSelectField
                 label="Tools"
                 optional={true}
                 name="tools"
                 placeholder="Enter Tools Used"
                 formik={formik}
+                options={toolsOptions}
+               
               />
             </Col>
             <Col md={6}>
-              <TextInput
+              <MultiSelectField
                 label="Technologies"
                 optional={true}
                 name="technologies"
                 placeholder="Enter Technologies"
                 formik={formik}
+                options={technologyOptions}
               />
             </Col>
             <Col md={6}>
@@ -143,7 +196,7 @@ const EditProject: React.FC<EditProjectProps> = ({ projectData, onUpdate }) => {
                 placeholder="Enter Project URL"
                 formik={formik}
               />
-            </Col>{" "}
+            </Col>
             <Col md={6}>
               <SelectField
                 label="Project Status"
@@ -168,7 +221,7 @@ const EditProject: React.FC<EditProjectProps> = ({ projectData, onUpdate }) => {
                 <label className="form-label fw-medium mt-3">Product Image</label>
                 <Dropzone
                   onDrop={handleDrop}
-                  accept={{ 'image/*': [] }} 
+                  accept={{ 'image/*': [] }}
                   multiple={false}
                 >
                   {({ getRootProps, getInputProps }) => (
@@ -177,11 +230,11 @@ const EditProject: React.FC<EditProjectProps> = ({ projectData, onUpdate }) => {
                       className="dropzone d-flex align-items-center justify-content-center text-center rounded-4 py-5"
                     >
                       <input {...getInputProps()} />
-                      {selectedImage ? (
+                      {(selectedImage) ? (
                         <div>
                           <img
                             src={
-                              typeof selectedImage === "string"
+                              typeof selectedImage == "string"
                                 ? selectedImage
                                 : URL.createObjectURL(selectedImage)
                             }

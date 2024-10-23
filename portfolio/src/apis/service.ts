@@ -33,14 +33,31 @@ export const service = createApi({
         method: "POST",
         body: projectData,
       }),
+      invalidatesTags: ["Project"],
+
     }),
     viewProject: builder.query({
       query: (activeTab) => ({
         url: `projects/?=${activeTab}`,
         method: "GET",
        
+      }),    
+    }),
+    viewProjectById: builder.query({
+      query: (projectId) => ({
+        url: `projects/${projectId}`,
+        method: "GET",
+       
+      }),    
+    }),
+    updateProject: builder.mutation({
+      query: ({formData, projectId}) => ({
+        url: `projects/${projectId}`,
+        method: "PATCH",
+        body: formData,
       }),
-    
+      invalidatesTags: ["Project"],
+
     }),
     deleteProject: builder.mutation({
       query: (projectId) => ({
@@ -56,5 +73,7 @@ export const {
   useUserLoginMutation,
   useAddProjectMutation, 
   useViewProjectQuery,
-  useDeleteProjectMutation
+  useDeleteProjectMutation,
+  useViewProjectByIdQuery,
+  useUpdateProjectMutation
 } = service;
