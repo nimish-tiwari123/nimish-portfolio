@@ -38,7 +38,7 @@ export const service = createApi({
     }),
     viewProject: builder.query({
       query: (activeTab) => ({
-        url: `projects/?=${activeTab}`,
+        url: `projects/?category=${activeTab}`,
         method: "GET",
        
       }),    
@@ -66,6 +66,13 @@ export const service = createApi({
       }),
       invalidatesTags: ["Project"],
     }),
+    contact: builder.mutation({
+      query: (data) => ({
+        url: "users/contact",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -75,5 +82,6 @@ export const {
   useViewProjectQuery,
   useDeleteProjectMutation,
   useViewProjectByIdQuery,
-  useUpdateProjectMutation
+  useUpdateProjectMutation,
+  useContactMutation
 } = service;

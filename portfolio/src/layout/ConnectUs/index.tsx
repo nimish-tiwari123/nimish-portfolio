@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { PrimaryButton } from "../../components";
+import { PrimaryButton, Loader } from "../../components";
+import { useContactMutation } from "../../apis/service";
 import { useFormik } from "formik";
-import { TextInput, TextArea , CommonModal} from "../../components"; 
+import { TextInput, TextArea, CommonModal } from "../../components";
 import * as Yup from "yup";
 import { call, email, location } from "../../assets/icons";
-import {success} from "../../assets/icons"; 
+import { success } from "../../assets/icons";
+import { toast } from "react-hot-toast";
+import { LuLoader2 } from "react-icons/lu";
 import "./style.css";
-
 
 // Form validation schema using Yup
 const validationSchema = Yup.object({
@@ -16,30 +18,31 @@ const validationSchema = Yup.object({
     .email("Invalid email address")
     .required("Email is required"),
   subject: Yup.string(),
-  phone: Yup.string().matches(/^\d{10}$/, "Phone number must be 10 digits"),
+  phoneNumber: Yup.string().matches(/^\d{10}$/, "Number must be 10 digits"),
   message: Yup.string().required("Message is required"),
 });
 
 const ConnectUs: React.FC = () => {
   // State to manage modal visibility
   const [modalShow, setModalShow] = useState(false);
-
+  const [addContact, { isLoading }] = useContactMutation();
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
       subject: "",
-      phone: "",
+      phoneNumber: "",
       message: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Form values:", values);
-
-      // Show modal on successful form submission
-      setModalShow(true);
-
-      // Submit logic
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        await addContact(values);
+        resetForm();
+        toast.success("Contact details sent successfully!");
+      } catch (err) {
+        toast.error("Failed to add contact. Please try again.");
+      }
     },
   });
 
@@ -96,11 +99,11 @@ const ConnectUs: React.FC = () => {
                 <Col md={6}>
                   <div className="mb-3">
                     <TextInput
-                      label="Phone Number"
+                      label="phoneNumber Number"
                       optional={true}
-                      name="phone"
+                      name="phoneNumber"
                       type="tel"
-                      placeholder="Enter your phone number"
+                      placeholder="Enter your phoneNumber number"
                       formik={formik}
                     />
                   </div>
@@ -117,9 +120,14 @@ const ConnectUs: React.FC = () => {
                   </div>
                 </Col>
               </Row>
-
               {/* Submit Button */}
-              <PrimaryButton text="Send Message" />
+              {isLoading ? (
+                <button className="primary-color px-3 py-2 rounded-pill bg-transparent secondary-border">
+                  Submitting.. <LuLoader2 size={20} className="loader-icon" />
+                </button>
+              ) : (
+                <PrimaryButton text="Send Message" />
+              )}
             </form>
           </Col>
           <Col md={5} data-aos="fade-left">

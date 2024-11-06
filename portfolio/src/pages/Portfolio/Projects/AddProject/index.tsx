@@ -61,20 +61,23 @@ const AddProject = () => {
         if (selectedImage) {
           formData.append("image", selectedImage); // Append the image
         }
-
-        // Send formData to the API
-        const response = await useAddProject(formData); // Wait for the API response
-        if (response) {
+    
+        const response = await useAddProject(formData); 
+    
+        if (response && response.data) { 
           setShowModal(true); 
-           navigate("/portfolio")
           setSelectedImage(null);
+          navigate("/portfolio"); 
         } else {
-          alert(response);
+          alert("Failed to add project. Please try again.");
         }
       } catch (err) {
         console.log(err);
+        alert("An error occurred. Please try again.");
       }
     },
+    
+    
   });
 
   const categoryOptions = [

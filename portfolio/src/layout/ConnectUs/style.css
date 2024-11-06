@@ -1,8 +1,21 @@
 .connect-details{
     height: 75%;
 }
+.loader-icon {
+    animation: animate-loader 1s ease infinite;
+ }
+ 
+ @keyframes animate-loader {
+     0% {
+         transform: rotate(0deg);
+     }
+     100% {
+         transform: rotate(360deg);
+     }
+ }
+ 
 @media screen and (max-width:500px){
    .connect-details{
     height: 100%;
    }
-  }
+}
