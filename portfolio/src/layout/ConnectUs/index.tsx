@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { PrimaryButton, Loader } from "../../components";
+import { PrimaryButton } from "../../components";
 import { useContactMutation } from "../../apis/service";
 import { useFormik } from "formik";
 import { TextInput, TextArea, CommonModal } from "../../components";

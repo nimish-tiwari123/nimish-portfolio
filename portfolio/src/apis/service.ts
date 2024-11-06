@@ -73,6 +73,13 @@ export const service = createApi({
         body: data,
       }),
     }),
+    subscribe: builder.mutation({
+      query: (email) => ({
+        url: "/subscriber",
+        method: "POST",
+        body: email,
+      }),
+    }),
   }),
 });
 
@@ -83,5 +90,6 @@ export const {
   useDeleteProjectMutation,
   useViewProjectByIdQuery,
   useUpdateProjectMutation,
-  useContactMutation
+  useContactMutation,
+  useSubscribeMutation
 } = service;

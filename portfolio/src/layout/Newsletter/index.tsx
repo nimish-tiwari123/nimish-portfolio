@@ -4,12 +4,10 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { CommonModal } from "../../components";
 import { success } from "../../assets/icons";
+import { useSubscribeMutation } from "../../apis/service";
+import { toast } from "react-hot-toast";
 import "./style.css";
 
-// Define form values interface
-interface NewsletterFormValues {
-  email: string;
-}
 
 // Validation Schema using Yup
 const validationSchema = Yup.object({
@@ -20,19 +18,25 @@ const validationSchema = Yup.object({
 
 const Newsletter: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-
-  const handleSubmit = (
-    values: NewsletterFormValues,
-    { resetForm }: FormikHelpers<NewsletterFormValues>
-  ) => {
-    setShowModal(true);
-    resetForm();
+  const [addSubscribe] = useSubscribeMutation();
+  const handleSubmit = async (values: any, { resetForm}: any) => {
+    try {
+      await addSubscribe(values);
+      resetForm();
+      toast.success("Subscription successful!");
+    } catch (err) {
+      console.error("Error submitting subscription:", err);
+      toast.error("Failed to subscribe. Please try again.");
+    }
   };
 
   return (
-    <section className="py-5" >
+    <section className="py-5">
       <Container>
-        <Row className="newsletter-box  px-md-5 px-2 py-5 d-flex flex-column"  data-aos="zoom-in">
+        <Row
+          className="newsletter-box  px-md-5 px-2 py-5 d-flex flex-column"
+          data-aos="zoom-in"
+        >
           <h1 className="text-light text-center primary-font fw-bold display-4">
             Subscribe to My Newsletter
           </h1>
