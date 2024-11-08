@@ -1,7 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { IoCodeSlashSharp } from "react-icons/io5";
 import { MdOutlineDesignServices } from "react-icons/md";
-import { IoMdGitMerge } from "react-icons/io";
 import { design, graphicdesign } from "../../../assets/icons";
 import { FaReact } from "react-icons/fa6";
 import { TbBrandNextjs } from "react-icons/tb";

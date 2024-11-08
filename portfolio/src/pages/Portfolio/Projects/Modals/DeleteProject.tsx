@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Modal, Container, Row } from "react-bootstrap";
 import { RxCross1 } from "react-icons/rx";
 import { useDeleteProjectMutation } from "../../../../apis/service";

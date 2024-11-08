@@ -1,4 +1,3 @@
-import { Row, Col } from "react-bootstrap";
 import "./style.css";
 interface CardProps {
   headingText: string;
