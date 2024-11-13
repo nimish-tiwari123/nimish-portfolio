@@ -45,8 +45,8 @@ const Header: React.FC = () => {
     <>
       <header className={scrolled ? "scrolled" : ""}>
         <Container fluid className="p-0 py-2">
-          <Navbar expand="lg" className="mx-lg-5 mx-xl-5 mx-0 px-2 contain nav">
-            <Container fluid className="mx-xl-5 mx-lg-5 mx-0">
+          <Navbar expand="lg" className="mx-xl-5 mx-0 px-2 contain nav">
+            <Container fluid className="mx-xl-5 mx-0">
               <Navbar.Brand>
                 <Link to="/">
                   <img src={logo} alt="Logo" className="logo-header" />
@@ -74,7 +74,7 @@ const Header: React.FC = () => {
                   </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                  <Nav className="flex-column gap-4 text-center mt-5 ">
+                  <Nav className="flex-column gap-4 text-center mt-5">
                     <NavLink
                       to="/"
                       className={({ isActive }: { isActive: boolean }) =>

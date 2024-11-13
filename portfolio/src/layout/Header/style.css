@@ -35,6 +35,12 @@ header {
 .header-offcanvas{
   transition: 0.6s all !important;
 }
+@media screen and (max-width: 1040px) {
+    .header-nav {
+       font-size: 14px;
+       padding-top: 6px;
+    }
+}
 @media screen and (max-width: 768px) {
     .logo-header {
         width: 150px;

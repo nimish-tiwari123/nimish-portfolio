@@ -59,7 +59,7 @@ const ConnectUs: React.FC = () => {
           Just Say Hello
         </h3>
         <Row className="mt-4">
-          <Col md={7}>
+          <Col lg={7}>
             <form onSubmit={formik.handleSubmit}>
               <Row className="mb-4">
                 <Col md={6}>
@@ -130,8 +130,8 @@ const ConnectUs: React.FC = () => {
               )}
             </form>
           </Col>
-          <Col md={5} data-aos="fade-left">
-            <Container className="px-md-5 px-0 ms-md-5 ms-0 my-md-0 my-5 pb-5 d-flex flex-column justify-content-between connect-details">
+          <Col lg={5}>
+            <Container className="px-xl-5 px-0 ms-xl-5 ms-0 my-xl-0 my-5 pb-5 d-flex flex-column justify-content-between connect-details">
               <Row>
                 <Col className="col-2 pt-2">
                   <span className="bg-custom-primary rounded-3 px-2 py-3">
@@ -140,7 +140,7 @@ const ConnectUs: React.FC = () => {
                 </Col>
                 <Col className="col-10">
                   <div className="text-secondary ">Call Me</div>
-                  <div className="fs-5 fw-medium">+91 9926491887</div>
+                  <div className="fs-5-custom fw-medium">+91 9926491887</div>
                 </Col>
               </Row>
               <Row>
@@ -151,7 +151,7 @@ const ConnectUs: React.FC = () => {
                 </Col>
                 <Col className="col-10">
                   <div className="text-secondary ">Email</div>
-                  <div className="fs-5 fw-medium">
+                  <div className="fs-5-custom fw-medium">
                     nimish.tiwari0704@gmail.com
                   </div>
                 </Col>
@@ -164,7 +164,7 @@ const ConnectUs: React.FC = () => {
                 </Col>
                 <Col className="col-10">
                   <div className="text-secondary ">Address</div>
-                  <div className="fs-5 fw-medium">
+                  <div className="fs-5-custom fw-medium">
                     Narmada Colony Khategaon District - Dewas (M.P.)
                   </div>
                 </Col>

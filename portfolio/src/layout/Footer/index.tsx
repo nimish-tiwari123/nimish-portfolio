@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
         <Row data-aos="zoom-in">
             
           {/* Column 1 */}
-          <Col md={3} sm={6} className="mb-4">
+          <Col lg={3} md={6} sm={6} className="mb-4">
             <h5 className="footer-title text-md-start text-center">
               <img src={footerlogo} alt="logo" />
             </h5>
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
           </Col>
 
           {/* Column 3 */}
-          <Col md={3} sm={6} className="mb-4 px-md-5 px-0">
+          <Col lg={3} md={6} sm={6} className="mb-4 px-md-5 px-0">
             <h5 className="footer-title text-light fw-bold text-center text-md-start mt-4 mt-md-0">Quick Links</h5>
             <ul className="list-unstyled d-flex gap-3 flex-column mt-4">
               <Link to="/">
@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
               </Link>
             </ul>
           </Col>
-          <Col md={3} sm={6} className="mb-4">
+          <Col lg={3} md={6} sm={6} className="mb-4">
             <h5 className="footer-title text-light fw-bold text-center text-md-start mt-4 mt-md-0">Services</h5>
             <ul className="list-unstyled d-flex gap-3 flex-column mt-4">
               <li className="text-light opacity-75 fw-light text-center text-md-start">
@@ -75,17 +75,18 @@ const Footer: React.FC = () => {
             </ul>
           </Col>
           {/* Column 4 */}
-          <Col md={3} sm={6} className="mb-4">
+          <Col lg={3} md={6} sm={6} className="mb-4">
             <h5 className="footer-title text-light fw-bold text-center text-md-start mt-4 mt-md-0">Get In Touch</h5>
             <ul className="list-unstyled  d-flex gap-4 flex-column mt-4">
-              <li className="text-light d-flex gap-2 contact-flex">
+              <li className="text-light d-flex gap-1 contact-flex">
                 <img src={call} alt="call" className="" style={{width:"24px"}}/>
                +91 9926491887
               </li>
-              <li className="text-light d-flex gap-2 contact-flex">
+              <li className="text-light d-flex gap-1 contact-flex">
                 <img src={email} alt="email" className="" style={{width:"24px"}}/>
                 nimish.tiwari0704@gmail.com
-              </li> <li className="text-light d-flex gap-2 contact-flex">
+              </li> 
+              <li className="text-light d-flex gap-1 contact-flex">
                 <img src={location} alt="location" className="" style={{width:"24px"}}/>
                 Narmada Colony Khategaon
                 District - Dewas (M.P.)
