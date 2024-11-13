@@ -61,7 +61,7 @@ const Newsletter: React.FC = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-green-dark text-light p-md-3 p-2 fw-medium rounded-3 border-0 w-25"
+                    className="bg-green-dark text-light p-md-3 p-2 fw-medium rounded-3 border-0 w-25 news-btn"
                     disabled={isSubmitting}
                   >
                     Subscribe
