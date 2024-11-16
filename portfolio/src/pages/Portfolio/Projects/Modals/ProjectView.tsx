@@ -9,6 +9,9 @@ interface ProjectModalProps {
     title: string;
     description: string;
     tools: string;
+    technologies:string;
+    url:string;
+    category : string[];
     status: string;
   };
 }
@@ -37,14 +40,23 @@ const ProjectView: React.FC<ProjectModalProps> = ({
               />
             </Col>
             <Col md={6} className="p-4">
-              <h3 className="fw-bold primary-color primary-font mt-md-4 mt-0">
+              <h3 className="fw-bold primary-color primary-font mt-md-4 my-0">
                 {project.title}
               </h3>
+              <p className="text-scondary">
+                {project.category[0]} {project.category[1]} {project.category[2]}
+              </p>
               <p className="opacity-75">{project.description}</p>
               <p>
                 Tools / Technologies Used:
-                <span className="fw-bold"> {project.tools}</span>
+                
+                <span className="fw-bold"> {project.tools} {project.technologies}</span>
               </p>
+              <p>
+                View Project:
+                <a href={project.url} target="_blanck" className="ms-2">View Project</a>
+              </p>
+              
               {project.status == "Completed" && (
                 <button className="text-success bg-success-subtle fw-medium border-0 rounded-pill py-1 px-3 ">
                   {project.status}
