@@ -103,12 +103,18 @@ const EditProject: React.FC = () => {
     { label: "Next JS", value: "Next JS" },
     { label: "HTML", value: "HTML" },
     { label: "CSS", value: "CSS" },
+    { label: "SCSS", value: "SCSS" },
     { label: "JavaScript", value: "JavaScript" },
     { label: "TypeScript", value: "TypeScript" },
     { label: "Angular", value: "Angular" },
     { label: "Git", value: "Git" },
     { label: "Github", value: "Github" },
     { label: "Bootstrap", value: "Bootstrap" },
+    { label: "Tailwind CSS", value: "Tailwind CSS" },
+    { label: "Node JS", value: "Node JS" },
+    { label: "Express JS", value: "Express JS" },
+    { label: "Mongo DB", value: "Mongo DB" },
+    { label: "MySql DB", value: "MySql DB" },
   ];
   
   const toolsOptions = [
