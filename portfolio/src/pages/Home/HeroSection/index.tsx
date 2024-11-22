@@ -34,7 +34,8 @@ const HeroSection = () => {
             </div>
           </Col>
           <Col md={6}>
-            <img src={hero} alt="Hero Image" className="w-100" data-aos="zoom-in-up"/>
+          <img src="https://res.cloudinary.com/dfeoj4efs/image/upload/v1732252050/pus0ex3lix2veikuy2io.svg" alt="Hero Image" className="w-100"/>
+            {/* <img src={hero} alt="Hero Image" className="w-100" data-aos="zoom-in-up"/> */}
           </Col>
         </Row>
       </Container>
