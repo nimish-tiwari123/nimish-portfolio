@@ -1,6 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { PrimaryButton } from "../../../components";
-import { aboutme } from "../../../assets/home";
 import { design } from "../../../assets/icons";
 import "./style.css";
 const AboutMe = () => {

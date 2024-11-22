@@ -20,7 +20,6 @@ import { success } from "../../../../assets/icons";
 import { useViewProjectByIdQuery, useUpdateProjectMutation } from "../../../../apis/service"; // Import the API hook
 import "./style.css";
 
-
 const EditProject: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>(); // Extract projectId from URL
   const { data, isLoading: viewLoading } = useViewProjectByIdQuery(projectId); 

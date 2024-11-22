@@ -1,5 +1,4 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { hero } from "../../../assets/home";
 import { Link } from "react-router-dom";
 import { PrimaryButton, SecondaryButton } from "../../../components";
 import "./style.css";
